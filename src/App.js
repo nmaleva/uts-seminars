@@ -6,6 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
+import SeminarDetails from './components/seminarDetails'
 
 class App extends Component {
   simpleAction = (event) => {
@@ -19,6 +20,7 @@ class App extends Component {
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
+        <Route path="/seminar-details" component={SeminarDetails} />
 
         {/* <p className="App-intro">
         <button onClick={this.simpleAction}>I agree</button>
