@@ -1,4 +1,5 @@
 import React from 'react'
+import RegistrationForm from './registrationForm'
 
 const SeminarDetails = () => {
     return (
@@ -10,6 +11,8 @@ const SeminarDetails = () => {
             <h4> Room: </h4> CB11.01.101
 
             <p> put the other stuff here </p>
+
+            < RegistrationForm />
         </div>
 
     )
