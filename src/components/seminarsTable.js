@@ -14,6 +14,8 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import { BrowserRouter, Route } from 'react-router-dom'
+import SeminarDetails from './seminarDetails';
 
 const actionsStyles = theme => ({
   root: {
@@ -125,7 +127,8 @@ class SeminarsTable extends React.Component {
       createData('Seminar 7', "some description", "CB11.01.101"),
       createData('Seminar 8', "some description", "CB11.01.101"),
       createData('Seminar 9', "some description", "CB11.01.101"),
-      createData('Seminar 10', "some description", "CB11.01.101")
+      createData('Seminar 10', "some description", "CB11.01.101"),
+      createData('Seminar 11', "desc", "CB11.10.111")
     ],
     page: 0,
     rowsPerPage: 5,

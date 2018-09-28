@@ -21,17 +21,29 @@ const styles = {
   },
 };
 
-function Navbar(props) {
+function Navbar(props)  {
+
   const { classes } = props;
+
+  let loginBtn;
+  if (props.isLoggedIn) {
+    loginBtn = <Button color="inherit" component={Link} to="/login">Logout</Button>;
+  } else {
+    loginBtn = <Button color="inherit" component={Link} to="/login">Login</Button>;
+    console.log('nav -- logged out');
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex}>
+
+          <Typography variant="title" color="inherit" align="left" className={classes.flex}>
             UTS Seminars
           </Typography>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit"component={Link} to="/login">Login</Button>
+          <Button color="inherit" component={Link} to="/">All Seminars</Button>
+          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/">My Seminars</Button>) }
+          {loginBtn}
         </Toolbar>
       </AppBar>
     </div>

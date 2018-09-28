@@ -1,10 +1,10 @@
 import React from 'react'
 import RegistrationForm from './registrationForm'
 
-const SeminarDetails = () => {
+const SeminarDetails = (props) => {
     return (
         <div className="container">
-            <h3>( Seminar Name )</h3>
+            <h3>Heading</h3>
 
             <h4>Description: </h4> This is some type of Description
 

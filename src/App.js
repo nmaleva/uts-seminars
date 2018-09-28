@@ -7,20 +7,37 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 import SeminarDetails from './components/seminarDetails'
+import firebase from 'firebase'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {isLoggedIn: false};
+  }
+
   simpleAction = (event) => {
     this.props.simpleAction();
+    
    }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({isLoggedIn: true});
+      } else {
+        this.setState({isLoggedIn: false});
+      }
+    });
+  }
 
   render() {
     return (
       <BrowserRouter>
-      <div className="App">
-        <Navbar />
+      <div className="App">  
+        <Navbar isLoggedIn={this.state.isLoggedIn} />
         <Route exact path="/" component={Home} />
+        <Route path="/seminar-details" component={SeminarDetails}/>
         <Route path="/login" component={Login} />
-        <Route path="/seminar-details" component={SeminarDetails} />
 
         {/* <p className="App-intro">
         <button onClick={this.simpleAction}>I agree</button>
