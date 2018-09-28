@@ -5,13 +5,13 @@ import firebase from 'firebase';
 import firebaseui from 'firebaseui';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-var config = {
-  apiKey: "AIzaSyDKwSoUn-wqWF3rpKiqupGUKnzTGegZjbQ",
-  authDomain: "uts-seminars.firebaseapp.com",
-  databaseURL: "https://uts-seminars.firebaseio.com",
-  storageBucket: "uts-seminars.appspot.com",
-};
-firebase.initializeApp(config);
+// var config = {
+//   apiKey: "AIzaSyDKwSoUn-wqWF3rpKiqupGUKnzTGegZjbQ",
+//   authDomain: "uts-seminars.firebaseapp.com",
+//   databaseURL: "https://uts-seminars.firebaseio.com",
+//   storageBucket: "uts-seminars.appspot.com",
+// };
+// firebase.initializeApp(config);
 
 // ui.start('#firebaseui-auth-container', {
 //   signInOptions: [
