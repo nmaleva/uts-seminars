@@ -7,7 +7,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 import SeminarDetails from './components/seminarDetails'
-
+import { getSeminarsThunk} from './store'
 class App extends Component {
   simpleAction = (event) => {
     this.props.simpleAction();

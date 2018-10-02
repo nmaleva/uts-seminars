@@ -14,6 +14,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import {getSeminarsFromFirebase} from '../firebase/base'
 
 const actionsStyles = theme => ({
   root: {
@@ -113,20 +114,15 @@ const styles = theme => ({
   },
 });
 
+
+
 class SeminarsTable extends React.Component {
   state = {
     rows: [
       createData('Seminar 1', "some description", "CB11.01.101"),
-      createData('Seminar 2', "some description", "CB11.01.101"),
-      createData('Seminar 3', "some description", "CB11.01.101"),
-      createData('Seminar 4', "some description", "CB11.01.101"),
-      createData('Seminar 5', "some description", "CB11.01.101"),
-      createData('Seminar 6', "some description", "CB11.01.101"),
-      createData('Seminar 7', "some description", "CB11.01.101"),
-      createData('Seminar 8', "some description", "CB11.01.101"),
-      createData('Seminar 9', "some description", "CB11.01.101"),
-      createData('Seminar 10', "some description", "CB11.01.101")
+      createData('Seminar 2', "some description", "CB11.01.101")
     ],
+    data: getSeminarsFromFirebase(),
     page: 0,
     rowsPerPage: 5,
   };
@@ -141,8 +137,11 @@ class SeminarsTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { rows, rowsPerPage, page } = this.state;
+    const { data,rows, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    console.log(this);
+    console.log(data);
+    console.log(rows);
 
     return (
       <Paper className={classes.root}>
@@ -158,6 +157,7 @@ class SeminarsTable extends React.Component {
             </TableHead>
             <TableBody>
               {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                console.log(row);
                 return (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">

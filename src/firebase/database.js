@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
-import {app, base} from '../base';
+import database from './base';
 
-class database extends Component {
+export default class database2
+ extends Component {
     constructor() {
         super()
         this.state = {
@@ -10,26 +11,20 @@ class database extends Component {
         }
 
         
-    }
+    } 
+    // componentWillMount() {
+    //     // const previousSeminars = this.state.seminars;
+    //     // this.database.on('child_added', snap => {
+    //     //     previousSeminars.push({
+    //     //     })
+    //     // })
+    //     this.seminarsRef = firebase.database().ref('/');
+    // }
 
-    componentWillMount() {
-        // const previousSeminars = this.state.seminars;
-
-        // this.database.on('child_added', snap => {
-        //     previousSeminars.push({
-
-        //     })
-        // })
-
-        this.seminarsRef = base.syncState('seminars/seminar1', {
-            context: this,
-            state: 'seminars'
-        });
-    }
-
-    componentWillUnmount() {
-        base.removeBinding(this.seminarsRef)
-    }
+    // componentWillUnmount() {
+    //     database.removeBinding
+    //     base.removeBinding(this.seminarsRef)
+    // }
 
     render() {
         return (
@@ -40,7 +35,5 @@ class database extends Component {
                 <p> venue: {this.state.seminars.venue} </p>
             </div>
         )
-    }
+    };
 }
-
-export default (database);
