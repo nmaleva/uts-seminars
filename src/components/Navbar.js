@@ -43,6 +43,7 @@ function Navbar(props)  {
           </Typography>
           <Button color="inherit" component={Link} to="/">All Seminars</Button>
           {props.isLoggedIn && (<Button color="inherit" component={Link} to="/">My Seminars</Button>) }
+          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/create-seminar">Create Seminar</Button>) }
           {loginBtn}
         </Toolbar>
       </AppBar>
