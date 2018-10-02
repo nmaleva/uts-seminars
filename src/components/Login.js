@@ -21,6 +21,10 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 // });
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    //this.props.handleLogin = this.handleLogin.bind(this);
+  }
   simpleAction = (event) => {
     this.props.simpleAction();
    }
@@ -42,14 +46,17 @@ class Login extends Component {
       
       // Avoid redirects after sign-in.
       signInSuccessWithAuthResult: () => false
-    }
+    },
+    // Disables 'Account Manager'
+    'credentialHelper': firebaseui.auth.CredentialHelper.NONE
   };
 
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
-    );
+        (user) => {
+          this.setState({isSignedIn: !!user})
+        });
   }
   
   // Make sure we un-register Firebase observers when the component unmounts.
@@ -70,7 +77,7 @@ class Login extends Component {
     return (
       <div>
         <h1>My App</h1>
-        <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+        <p>Welcome ! You are now signed-in!</p>
         <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
       </div>
     );

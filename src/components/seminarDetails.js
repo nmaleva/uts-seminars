@@ -33,7 +33,7 @@ const SeminarDetails = (props) => {
                 < RegistrationForm />
             </div>
         )
-    } else {
+    } else if (seminar == null) {
         return (
             <div className="container">
                 Sorry this seminar does not exist!

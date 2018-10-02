@@ -7,21 +7,35 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 import SeminarDetails from './components/seminarDetails'
-import { getSeminarsThunk} from './store'
 import CreateSeminarForm from './components/CreateSeminarForm'
-
-
+import firebase from 'firebase'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {isLoggedIn: false};
+  }
+
   simpleAction = (event) => {
     this.props.simpleAction();
+    
    }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({isLoggedIn: true});
+      } else {
+        this.setState({isLoggedIn: false});
+      }
+    });
+  }
 
   render() {
     return (
       <BrowserRouter>
-      <div className="App">
-        <Navbar />
+      <div className="App">  
+        <Navbar isLoggedIn={this.state.isLoggedIn} />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/seminar-details/:id" component={SeminarDetails} />
