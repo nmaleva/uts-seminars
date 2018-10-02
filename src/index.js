@@ -5,8 +5,12 @@ import configureStore from './store';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import store from './store'
-import { getSeminarsThunk} from './store'
+//import store from './store'
+import { createStore } from 'redux'
+import rootReducer from './reducers/rootReducer'
+
+const store = createStore(rootReducer);
+
 
 ReactDOM.render(
     <Provider store={store}>

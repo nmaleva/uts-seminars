@@ -117,12 +117,15 @@ const styles = theme => ({
 
 
 class SeminarsTable extends React.Component {
+  //Grabbing projects from store that was passed down in Home Component
+  constructor(props) {
+    super(props);
+    this.state.rows = props.projects
+    console.log(props);
+  }
   state = {
-    rows: [
-      createData('Seminar 1', "some description", "CB11.01.101"),
-      createData('Seminar 2', "some description", "CB11.01.101")
-    ],
-    data: getSeminarsFromFirebase(),
+    rows: [],
+    // data: getSeminarsFromFirebase(),
     page: 0,
     rowsPerPage: 5,
   };
@@ -140,7 +143,6 @@ class SeminarsTable extends React.Component {
     const { data,rows, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     console.log(this);
-    console.log(data);
     console.log(rows);
 
     return (
@@ -161,10 +163,10 @@ class SeminarsTable extends React.Component {
                 return (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {row.title}
                     </TableCell>
-                    <TableCell >{row.desc}</TableCell>
-                    <TableCell >{row.room}</TableCell>
+                    <TableCell >{row.abstract}</TableCell>
+                    <TableCell >{row.venue}</TableCell>
                     <TableCell> <a href="/seminar-details"> More Info</a> </TableCell>
                   </TableRow>
                 );

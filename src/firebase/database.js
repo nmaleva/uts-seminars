@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase'
 import database from './base';
 
-export default class database2
- extends Component {
+export default class database2 extends Component {
     constructor() {
         super()
         this.state = {

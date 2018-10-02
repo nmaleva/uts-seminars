@@ -8,6 +8,9 @@ import Login from './components/Login'
 import Navbar from './components/Navbar'
 import SeminarDetails from './components/seminarDetails'
 import { getSeminarsThunk} from './store'
+import CreateSeminar from './components/CreateSeminar'
+
+
 class App extends Component {
   simpleAction = (event) => {
     this.props.simpleAction();
@@ -21,6 +24,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/seminar-details" component={SeminarDetails} />
+        <Route path="/create-seminar" component={CreateSeminar} />
 
         {/* <p className="App-intro">
         <button onClick={this.simpleAction}>I agree</button>

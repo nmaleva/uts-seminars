@@ -1,10 +1,12 @@
-export default (state = {}, action) => {
-    switch (action.type) {
-     case 'SIMPLE_ACTION':
-      return {
-       result: action.payload
-      }
-     default:
-      return state
-    }
-   }
+/**
+ * REDUCER
+ */
+function Reducer (state = [], action)
+
+const initState = {}
+
+const authReducer = (stat = initState, action) => {
+    return state;
+}
+
+export default authReducer
