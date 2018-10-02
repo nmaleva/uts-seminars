@@ -11,6 +11,7 @@ import { getSeminarsThunk} from './store'
 import CreateSeminarForm from './components/CreateSeminarForm'
 
 
+
 class App extends Component {
   simpleAction = (event) => {
     this.props.simpleAction();
@@ -23,7 +24,7 @@ class App extends Component {
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/seminar-details" component={SeminarDetails} />
+        <Route path="/seminar-details/:id" component={SeminarDetails} />
         <Route path="/create-seminar" component={CreateSeminarForm} />
 
         {/* <p className="App-intro">

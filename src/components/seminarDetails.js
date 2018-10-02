@@ -1,21 +1,46 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import {connect} from 'react-redux'
 import RegistrationForm from './registrationForm'
 
-const SeminarDetails = () => {
-    return (
-        <div className="container">
-            <h3>( Seminar Name )</h3>
-
-            <h4>Description: </h4> This is some type of Description
-
-            <h4> Room: </h4> CB11.01.101
-
-            <p> put the other stuff here </p>
-
-            < RegistrationForm />
-        </div>
-
-    )
+//Grabbing Project objects from the store 
+const mapStateToProps = (state) => {
+    return {
+        seminars: state.seminar.seminars
+    }
 }
 
-export default SeminarDetails
+const SeminarDetails = (props) => {
+
+    //grab ID of seminar from url parameters
+    const id = props.match.params.id
+    console.log(props.seminars);
+
+    //Grab seminar from seminar list in state
+    const seminar = props.seminars.find(seminar => id == seminar.id)
+    console.log(seminar);
+    if(seminar != null) {
+        return (
+            <div className="container">
+                <h3> {seminar.title} - ID: {id} </h3>
+
+                <h4>Abstract: </h4> {seminar.abstract}
+
+                <h4> Room: </h4> {seminar.venue}
+
+                <p> put the other stuff here </p>
+
+                < RegistrationForm />
+            </div>
+        )
+    } else {
+        return (
+            <div className="container">
+                Sorry this seminar does not exist!
+            </div>
+        )
+    }
+}
+
+
+export default connect(mapStateToProps)(SeminarDetails)

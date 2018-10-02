@@ -167,7 +167,7 @@ class SeminarsTable extends React.Component {
                     </TableCell>
                     <TableCell >{row.abstract}</TableCell>
                     <TableCell >{row.venue}</TableCell>
-                    <TableCell> <a href="/seminar-details"> More Info</a> </TableCell>
+                    <TableCell> <a href={"/seminar-details/" + row.id}> More Info</a> </TableCell>
                   </TableRow>
                 );
               })}
