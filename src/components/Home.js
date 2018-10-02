@@ -45,11 +45,11 @@ import {connect} from 'react-redux'
 class Home extends Component {
     render() {
         console.log(this.props);
-        const {projects} = this.props;
+        const {seminars} = this.props;
         return (
             <div className="home container">
                 <h2> Welcome to Homepage! </h2>
-                <SeminarsTable projects={projects} />
+                <SeminarsTable seminars={seminars} />
             </div>
         )
     }
@@ -60,7 +60,7 @@ class Home extends Component {
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
     return {
-        projects: state.project.projects
+        seminars: state.seminar.seminars
     }
 }
 export default connect(mapStateToProps)(Home)

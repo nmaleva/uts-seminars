@@ -120,7 +120,7 @@ class SeminarsTable extends React.Component {
   //Grabbing projects from store that was passed down in Home Component
   constructor(props) {
     super(props);
-    this.state.rows = props.projects
+    this.state.rows = props.seminars
     console.log(props);
   }
   state = {

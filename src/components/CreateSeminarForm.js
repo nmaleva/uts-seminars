@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createSeminar } from '../actions/seminarActions'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'
 
-class CreateSeminar extends Component {
+
+class CreateSeminarForm extends Component {
     state = {
         title: '',
         abstract: '',
@@ -24,7 +27,8 @@ class CreateSeminar extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        console.log(this.props);
+        this.props.createSeminar(this.state)
     }
 
     render() {
@@ -55,4 +59,9 @@ class CreateSeminar extends Component {
 
 }
 
-export default CreateSeminar
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createSeminar: (seminar) => dispatch(createSeminar(seminar))
+    }
+}
+export default connect(null, mapDispatchToProps)(CreateSeminarForm)
