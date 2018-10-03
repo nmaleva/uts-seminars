@@ -31,8 +31,7 @@ class CreateSeminarForm extends Component {
         organiser: '',
         speaker: '',
         time: moment().format("HH:mm"),
-        venue: '',
-        attendees: []
+        venue: ''
     }
 
     handleChange = (e) => {

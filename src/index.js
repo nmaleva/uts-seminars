@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux'
-import configureStore from './store';
+import { Provider } from 'react-redux'
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-//import store from './store'
-import { createStore, applyMiddleware } from 'redux'
+import App from './App'
+import registerServiceWorker from './registerServiceWorker'
+import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers/rootReducer'
 import thunk from 'redux-thunk'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import database from './firebase/base'
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, 
+    compose(
+        applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+        reduxFirestore(database),
+        reactReduxFirebase(database)
+    )
+);
 
 
 ReactDOM.render(

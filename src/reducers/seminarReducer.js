@@ -7,9 +7,15 @@ const initState = {
 
 const seminarReducer = (state = initState, action) => {
     switch(action.type) {
-        case 'CREATE_SEMINAR': console.log('created semianr', action.seminar)
+        case 'CREATE_SEMINAR': 
+            console.log('created semianr', action.seminar);
+            return state;
+        case 'CREATE_SEMINAR_ERROR':
+            console.log('create seminar error', action.err);
+            return state;
+        default:
+            return state;
     }
-    return state
 }
 
 export default seminarReducer
