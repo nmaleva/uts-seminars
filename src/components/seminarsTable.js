@@ -14,7 +14,6 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import {getSeminarsFromFirebase} from '../firebase/base'
 
 const actionsStyles = theme => ({
   root: {
@@ -125,7 +124,6 @@ class SeminarsTable extends React.Component {
   }
   state = {
     rows: [],
-    // data: getSeminarsFromFirebase(),
     page: 0,
     rowsPerPage: 5,
   };
