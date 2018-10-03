@@ -57,7 +57,9 @@ class CreateSeminarForm extends Component {
     render() {
         console.log(hosts);
         console.log(venues);
-        const {classes} = this.props
+        const {title, abstract, speaker, host, venue, duration} = this.state;
+        const {classes} = this.props;
+        const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
          * Items below are used to populate the selects 
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
@@ -70,10 +72,16 @@ class CreateSeminarForm extends Component {
             <div className="container">
                 <form >
                     <h1> Create Seminar </h1>
-                    <TextField required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange}/>
-                    <TextField id="abstract" label="Enter Abstract" multiline value={this.state.abstract} onChange={this.handleChange}/>
-                    <TextField id="speaker" label="Enter Speaker" value={this.state.speaker} onChange={this.handleChange}/>
-
+                    <FormControl className={classes.formControl}>
+                       
+                        <TextField required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange}/>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <TextField id="abstract" label="Enter Abstract" multiline value={this.state.abstract} onChange={this.handleChange}/>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <TextField id="speaker" label="Enter Speaker" value={this.state.speaker} onChange={this.handleChange}/>
+                    </FormControl>
                     <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="host-id">Select Host</InputLabel>
                         <Select value={this.state.host} onChange={this.handleSelectChange}
@@ -93,13 +101,19 @@ class CreateSeminarForm extends Component {
                             {venueItems}
                         </Select>
                     </FormControl>
-
-                    <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange}/>
-                    <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange}/>
-                    <TextField id="duration" type="number" label="Enter Duration in Minutes"  value={this.state.duration} onChange={this.handleChange}/>
-
-                    <Button onClick={this.handleSubmit}> Submit </Button>
-                    
+                    <br/>
+                    <FormControl className={classes.formControl}>
+                        <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange}/>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange}/>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <TextField id="duration" type="number" label="Enter Duration in Minutes"  value={this.state.duration} onChange={this.handleChange}/>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <Button disabled={!isEnabled} variant="contained" color="primary" className={classes.button} onClick={this.handleSubmit}> Submit </Button>
+                    </FormControl>
                 </form>
             </div>
         )
