@@ -28,7 +28,6 @@ class CreateSeminarForm extends Component {
         date: moment().format('YYYY-MM-DD'),
         duration: 0,
         host: '',
-        organiser: '',
         speaker: '',
         time: moment().format("HH:mm"),
         venue: ''

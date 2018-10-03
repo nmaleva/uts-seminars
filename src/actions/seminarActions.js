@@ -3,7 +3,8 @@ export const createSeminar = (seminar) => {
         //make async call to database
         const firestore = getFirestore();
         firestore.collection('seminars').add({
-            ...seminar
+            ...seminar,
+            organiser: getFirebase().auth().currentUser.uid
         }).then(() => {
             dispatch({ type: 'CREATE_SEMINAR', seminar: seminar});
         }).catch((err) => {
