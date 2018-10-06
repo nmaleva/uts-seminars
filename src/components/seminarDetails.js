@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import RegistrationForm from './registrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import AttendeeTable from './attendeesTable'
 
 const SeminarDetails = (props) => {
 
@@ -27,6 +28,7 @@ const SeminarDetails = (props) => {
                 <p> put the other stuff here </p>
 
                 < RegistrationForm seminarId={id}/>
+                < AttendeeTable seminarId={id}/>
             </div>
         )
     } else if (seminar == null) {
