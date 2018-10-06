@@ -26,7 +26,7 @@ const SeminarDetails = (props) => {
 
                 <p> put the other stuff here </p>
 
-                < RegistrationForm />
+                < RegistrationForm seminarId={id}/>
             </div>
         )
     } else if (seminar == null) {
