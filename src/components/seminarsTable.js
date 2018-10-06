@@ -14,6 +14,9 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import { compose } from 'redux'
+import {connect} from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
 
 const actionsStyles = theme => ({
   root: {
@@ -117,13 +120,16 @@ const styles = theme => ({
 
 class SeminarsTable extends React.Component {
   //Grabbing projects from store that was passed down in Home Component
-  constructor(props) {
-    super(props);
-    this.state.rows = props.seminars
-    console.log(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   //this.state.rows = seminars
+  //   //const {seminars} = this.props;
+  //   this.state.rows = this.props.seminars
+  //   console.log(props);
+  // }
+
+
   state = {
-    rows: [],
     page: 0,
     rowsPerPage: 5,
   };
@@ -138,7 +144,10 @@ class SeminarsTable extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { data,rows, rowsPerPage, page } = this.state;
+    const { rowsPerPage, page } = this.state;
+    const rows = this.props.seminars;
+    // const page = 0;
+    // const rowsPerPage = 5;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     console.log(this);
     console.log(rows);
@@ -199,4 +208,17 @@ SeminarsTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SeminarsTable);
+//Grabbing Project objects from the store 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars : []
+  }
+}
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+      { collection: 'seminars' }
+  ]),
+  withStyles(styles)
+)(SeminarsTable)

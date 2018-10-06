@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import SeminarsTable from "./seminarsTable"
 import Button from '@material-ui/core/Button/Button';
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class Home extends Component {
     render() {
@@ -19,8 +21,14 @@ class Home extends Component {
 
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        seminars: state.seminar.seminars
+        seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars : []
     }
 }
-export default connect(mapStateToProps)(Home)
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'seminars' }
+    ])
+)(Home)
