@@ -32,7 +32,8 @@ const AttendeeTable = (props) => {
   
   //seminarId = this.props.seminarId;
   console.log(props);
-  const rows = props.attendees;
+  let rows = props.attendees;
+  let rowsArr = Object.values(rows);
   console.log(rows);
   //console.log(props.seminar.attendees);
 
@@ -41,24 +42,24 @@ const AttendeeTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell numeric>Name</TableCell>
+            <TableCell>Name</TableCell>
             <TableCell numeric>Email</TableCell>
             <TableCell numeric>Phone</TableCell>
+            <TableCell numeric></TableCell>
             <TableCell numeric></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => {
+          {rowsArr.map(row => {
             return (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell numeric>{row.name}</TableCell>
                 <TableCell numeric>{row.email}</TableCell>
                 <TableCell numeric>{row.phone}</TableCell>
-                <TableCell numeric>More info</TableCell>
+                <TableCell numeric>Edit</TableCell>
+                <TableCell numeric>Delete</TableCell>
               </TableRow>
             );
           })}
