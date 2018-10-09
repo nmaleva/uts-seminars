@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Navbar from './components/Navbar'
 import SeminarDetails from './components/seminarDetails'
 import CreateSeminarForm from './components/CreateSeminarForm'
+import MySeminars from './components/MySeminars'
 import firebase from 'firebase'
 
 class App extends Component {
@@ -39,7 +40,9 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/seminar-details/:id" component={SeminarDetails} />
+        <Route path="/my-seminars" component={MySeminars} />
         <Route path="/create-seminar" component={CreateSeminarForm} />
+
 
         {/* <p className="App-intro">
         <button onClick={this.simpleAction}>I agree</button>

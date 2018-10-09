@@ -12,7 +12,7 @@ class Home extends Component {
         const {seminars} = this.props;
         return (
             <div className="home container">
-                <h2> Welcome to Homepage! </h2>
+                <h2>Welcome to Homepage!</h2>
                 <SeminarsTable seminars={seminars} />
             </div>
         )

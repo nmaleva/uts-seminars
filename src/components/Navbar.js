@@ -42,7 +42,7 @@ function Navbar(props)  {
             UTS Seminars
           </Typography>
           <Button color="inherit" component={Link} to="/">All Seminars</Button>
-          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/">My Seminars</Button>) }
+          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/my-seminars">My Seminars</Button>) }
           {props.isLoggedIn && (<Button color="inherit" component={Link} to="/create-seminar">Create Seminar</Button>) }
           {loginBtn}
         </Toolbar>

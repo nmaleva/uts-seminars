@@ -146,11 +146,10 @@ class SeminarsTable extends React.Component {
     const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
     const rows = this.props.seminars;
+    console.log(this.props);
     // const page = 0;
     // const rowsPerPage = 5;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-    console.log(this);
-    console.log(rows);
 
     return (
       <Paper className={classes.root}>
@@ -208,17 +207,6 @@ SeminarsTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-//Grabbing Project objects from the store 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars : []
-  }
-}
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([
-      { collection: 'seminars' }
-  ]),
   withStyles(styles)
 )(SeminarsTable)

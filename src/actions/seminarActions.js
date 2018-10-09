@@ -15,9 +15,6 @@ export const createSeminar = (seminar) => {
 
 export const addAttendee = (attendee, seminarId) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        // console.log("yo");
-        // dispatch({type: 'ADD_ATTENDEE', attendee:attendee});
-        //make async call to database
         const firestore = getFirestore();
         firestore.collection('seminars/'+seminarId+'/attendees').add({
             ...attendee

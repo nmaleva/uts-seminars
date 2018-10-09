@@ -27,16 +27,13 @@ class RegistrationForm extends Component {
   }
 
   handleChange = (e) => {
-      console.log(e.target);
       this.setState({
           [e.target.id]: e.target.value
       })
-      console.log(this.state);
   }
 
   handleSubmit = (e) => {
       e.preventDefault();
-      console.log(this.props);
       this.props.addAttendee(this.state,this.props.seminarId);
   }
 
