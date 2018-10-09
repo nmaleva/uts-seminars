@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { compose } from 'redux'
 import {connect} from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import DeleteAttendee from './DeleteAttendee';
 
 const styles = theme => ({
   root: {
@@ -33,8 +34,11 @@ const AttendeeTable = (props) => {
   //seminarId = this.props.seminarId;
   console.log(props);
   let rows = props.attendees;
-  let rowsArr = Object.values(rows);
-  console.log(rows);
+  let rowsArr = Object.keys(rows).map(key => {
+    rows[key].id = key;
+    return rows[key];
+  });
+  console.log(rowsArr);
   //console.log(props.seminar.attendees);
 
   return (
@@ -59,7 +63,7 @@ const AttendeeTable = (props) => {
                 <TableCell numeric>{row.email}</TableCell>
                 <TableCell numeric>{row.phone}</TableCell>
                 <TableCell numeric>Edit</TableCell>
-                <TableCell numeric>Delete</TableCell>
+                <TableCell numeric><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
               </TableRow>
             );
           })}

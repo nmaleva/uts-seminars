@@ -45,3 +45,16 @@ export const deleteSeminar = (seminarId) => {
         })
     }
 }
+
+export const deleteAttendee = (attendeeId, seminarId) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('seminars/'+seminarId+'/attendees').doc(attendeeId).delete()
+        .then(() => {
+            dispatch({ type: 'DELETE_SEMINAR'});
+            return window.location.reload();
+        }).catch((err) => {
+            dispatch({type: 'DELET_SEMINAR_ERROR', err});
+        })
+    }
+}
