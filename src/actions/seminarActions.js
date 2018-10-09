@@ -23,6 +23,7 @@ export const addAttendee = (attendee, seminarId) => {
             ...attendee
         }).then(() => {
             dispatch({ type: 'ADD_ATTENDEE', attendee: attendee});
+            return window.location.reload();
         }).catch((err) => {
             dispatch({type: 'ADD_ATTENDEE_ERROR', err});
         })
