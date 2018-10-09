@@ -14,7 +14,7 @@ class MySeminars extends Component {
         return (
             <div className="home container">
                 <h2>My Seminars</h2>
-                <SeminarsTable seminars={mySeminars} />
+                <SeminarsTable seminars={mySeminars} seminarPageLink="/my-seminar-details/"/>
             </div>
         )
     }
@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
     const mySeminars = Object.keys(seminars).map(seminarId => {
         console.log(seminars[seminarId].organiser);
         if(seminars[seminarId].organiser === userId ){
+            seminars[seminarId].id = seminarId;
             return seminars[seminarId];
         }
     });

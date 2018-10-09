@@ -13,7 +13,7 @@ class Home extends Component {
         return (
             <div className="home container">
                 <h2>Welcome to Homepage!</h2>
-                <SeminarsTable seminars={seminars} />
+                <SeminarsTable seminars={seminars} seminarPageLink="/seminar-details/"/>
             </div>
         )
     }

@@ -146,7 +146,9 @@ class SeminarsTable extends React.Component {
     const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
     const rows = this.props.seminars;
-    console.log(this.props);
+    const pageLink = this.props.seminarPageLink;
+    //console.log(this.props);
+    console.log(rows);
     // const page = 0;
     // const rowsPerPage = 5;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -165,7 +167,6 @@ class SeminarsTable extends React.Component {
             </TableHead>
             <TableBody>
               {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-                console.log(row);
                 return (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
@@ -173,7 +174,7 @@ class SeminarsTable extends React.Component {
                     </TableCell>
                     <TableCell >{row.abstract}</TableCell>
                     <TableCell >{row.venue}</TableCell>
-                    <TableCell> <a href={"/seminar-details/" + row.id}> More Info</a> </TableCell>
+                    <TableCell> <a href={pageLink + row.id}> More Info</a> </TableCell>
                   </TableRow>
                 );
               })}

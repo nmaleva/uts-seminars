@@ -1,3 +1,7 @@
+import MySeminars from '../components/MySeminars'
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 export const createSeminar = (seminar) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //make async call to database
@@ -7,6 +11,7 @@ export const createSeminar = (seminar) => {
             organiser: getFirebase().auth().currentUser.uid
         }).then(() => {
             dispatch({ type: 'CREATE_SEMINAR', seminar: seminar});
+            return window.location.href = "/"
         }).catch((err) => {
             dispatch({type: 'CREATE_SEMINAR_ERROR', err});
         })
@@ -23,6 +28,20 @@ export const addAttendee = (attendee, seminarId) => {
             return window.location.reload();
         }).catch((err) => {
             dispatch({type: 'ADD_ATTENDEE_ERROR', err});
+        })
+    }
+}
+
+
+export const deleteSeminar = (seminarId) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('seminars').doc(seminarId).delete()
+        .then(() => {
+            dispatch({ type: 'DELETE_SEMINAR'});
+            return window.location.href = "/"
+        }).catch((err) => {
+            dispatch({type: 'DELET_SEMINAR_ERROR', err});
         })
     }
 }

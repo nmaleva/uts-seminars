@@ -13,6 +13,12 @@ const seminarReducer = (state = initState, action) => {
         case 'CREATE_SEMINAR_ERROR':
             console.log('create seminar error', action.err);
             return state;
+        case 'DELETE_SEMINAR':
+            console.log('delete seminar', action);
+            return state;
+        case 'DELETE_SEMINAR_ERROR':
+            console.log('delete seminar error', action.err);
+            return state;
         case 'ADD_ATTENDEE':
             console.log('added attendee', action.attendee);
             return state;
