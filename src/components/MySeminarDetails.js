@@ -6,21 +6,14 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import AttendeeTable from './attendeesTable'
 import DeleteSeminar from './DeleteSeminar'
+import SeminarUpdate from './seminarUpdate'
+import SeminarDetailsContent from './seminarDetailsContent'
+import Button from '@material-ui/core/Button'
 
-
-
-const handleButtonClick = (e) => {
-    e.preventDefault();
-    console.log("button clicked");
-    //this.props.addAttendee(this.state,this.props.seminarId);
-}
 
 const MySeminarDetails = (props) => {
-
-    
     //grab ID of seminar from url parameters
     const id = props.match.params.id
-    console.log(props);
     const {seminar} = props;
 
     //Grab seminar from seminar list in state
@@ -29,13 +22,9 @@ const MySeminarDetails = (props) => {
     if(seminar != null) {
         return (
             <div className="container">
-                <h3> {seminar.title} - ID: {id} </h3>
-
-                <b> Abstract: </b> {seminar.abstract}
-                <br/>
-                <b>  Room: </b> {seminar.venue}
-
-                <p> put the other stuff here </p>
+                < SeminarDetailsContent seminar={seminar} />
+                < SeminarUpdate seminarId= {id} seminar={seminar}/> 
+ 
                 <DeleteSeminar id={id}/>
 
                 < RegistrationForm seminarId={id}/>
@@ -52,13 +41,11 @@ const MySeminarDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     const id = ownProps.match.params.id;
     const seminars = state.firestore.data.seminars;
     const seminar = seminars ? seminars[id] : null
     return {
         seminar: seminar
-        //seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars : []
     }
 }
 export default compose(
