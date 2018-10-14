@@ -31,9 +31,9 @@ const MySeminarDetails = (props) => {
             <div className="container">
                 <h3> {seminar.title} - ID: {id} </h3>
 
-                <h4>Abstract: </h4> {seminar.abstract}
-
-                <h4> Room: </h4> {seminar.venue}
+                <b> Abstract: </b> {seminar.abstract}
+                <br/>
+                <b>  Room: </b> {seminar.venue}
 
                 <p> put the other stuff here </p>
                 <DeleteSeminar id={id}/>

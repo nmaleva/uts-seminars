@@ -5,6 +5,7 @@ import RegistrationForm from './registrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import AttendeeTable from './attendeesTable'
+import SeminarUpdate from './seminarUpdate'
 
 const SeminarDetails = (props) => {
 
@@ -19,22 +20,35 @@ const SeminarDetails = (props) => {
     if(seminar != null) {
         return (
             <div className="container">
-                <h3> {seminar.title} - ID: {id} </h3>
+                <h1> {seminar.title} </h1>
 
-                <h4>Abstract: </h4> {seminar.abstract}
+                <b> Abstract: </b> {seminar.abstract}
+                <br/>
+                <b>  Room: </b> {seminar.venue}
+                <br/>
+                <b>  Speaker: </b> {seminar.speaker}
+                <br/>
+                <b> Host </b> {seminar.host}
+                <br/> 
+                <b> Date </b> {seminar.date}
+                <br/> 
+                <b> Time </b> {seminar.time}
+                <br/> 
+                <b> duration </b> {seminar.duration} minutes
+                <br/> 
 
-                <h4> Room: </h4> {seminar.venue}
-
-                <p> put the other stuff here </p>
-
+                <h2> Register Attendance </h2>
+                < SeminarUpdate seminarId= {id} seminar={seminar} />
                 < RegistrationForm seminarId={id}/>
+                <br/>
+                <h2> List of Attendees </h2>
                 < AttendeeTable seminarId={id}/>
             </div>
         )
     } else if (seminar == null) {
         return (
             <div className="container">
-                Sorry this seminar does not exist!
+                Seminar is loading ...
             </div>
         )
     }

@@ -52,7 +52,7 @@ class DeleteSeminar extends Component {
                             Cancel
                         </Button>
                         <Button onClick={this.handleDelete} color="secondary" autoFocus>
-                            Delete dis
+                            Delete
                         </Button>
                     </DialogActions>
                 </Dialog>

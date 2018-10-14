@@ -25,6 +25,12 @@ const seminarReducer = (state = initState, action) => {
         case 'CREATE_ATTENDEE_ERROR':
             console.log('add attendee error', action.err)
             return state;
+        case 'UPDATE_SEMINAR':
+            console.log('seminar updated', action.seminar);
+            return state;
+        case 'UPDATE_SEMINAR_ERROR':
+            console.log('seminar update error', action.err)
+            return state;
         default:
             return state;
     }

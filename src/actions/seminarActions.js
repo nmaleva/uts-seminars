@@ -54,7 +54,19 @@ export const deleteAttendee = (attendeeId, seminarId) => {
             dispatch({ type: 'DELETE_SEMINAR'});
             return window.location.reload();
         }).catch((err) => {
-            dispatch({type: 'DELET_SEMINAR_ERROR', err});
+            dispatch({type: 'DELETE_SEMINAR_ERROR', err});
+        })
+    }
+}
+
+export const updateSeminar = (seminarId, seminar) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('seminars').doc(seminarId).update(seminar).
+        then(() => {
+            dispatch({ type: 'UPDATE_SEMINAR', seminar:seminar});
+        }).catch((err) => {
+            dispatch({type:'UPDATE_SEMINAR_ERROR', err});
         })
     }
 }

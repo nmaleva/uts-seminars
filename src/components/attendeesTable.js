@@ -11,6 +11,7 @@ import { compose } from 'redux'
 import {connect} from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import DeleteAttendee from './DeleteAttendee';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -62,7 +63,7 @@ const AttendeeTable = (props) => {
                 </TableCell>
                 <TableCell numeric>{row.email}</TableCell>
                 <TableCell numeric>{row.phone}</TableCell>
-                <TableCell numeric>Edit</TableCell>
+                <TableCell numeric><Button variant="contained" color="default">Edit</Button></TableCell>
                 <TableCell numeric><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
               </TableRow>
             );

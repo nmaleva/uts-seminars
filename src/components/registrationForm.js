@@ -47,7 +47,7 @@ class RegistrationForm extends Component {
       return (
           <div>
               <form style={{width: '100%' }}>
-                  <h1> Register for this Seminar </h1>
+                  
                   <div>
                       <FormControl className={classes.formControl}>       
                           <TextField style={{width: 500}} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange}/>
