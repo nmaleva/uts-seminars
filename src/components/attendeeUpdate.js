@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import Select from "@material-ui/core/Select"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
@@ -19,6 +21,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 const styles = theme => ({
     formControl: {
@@ -32,6 +36,7 @@ class SeminarUpdate extends Component {
         name: this.props.attendee.name,
         email: this.props.attendee.email,
         phone: this.props.attendee.phone,
+        attendance: this.props.attendee.attendance,
         open:false
     }
 
@@ -55,6 +60,7 @@ class SeminarUpdate extends Component {
             name: this.state.name,
             email: this.state.email,
             phone: this.state.phone,
+            attendance: this.state.attendance
         }
         this.props.updateAttendee(this.props.seminarId, this.props.attendeeId, updatedAttendee)
         this.handleClose();
@@ -105,6 +111,21 @@ class SeminarUpdate extends Component {
                                 <FormControl className={classes.formControl}>
                                     <TextField required id="phone" label="Enter Phone Number" style={{width: 800}} multiline value={this.state.phone} onChange={this.handleChange}/>
                                 </FormControl>
+                            </div>
+                            <div>
+                            <FormControl component="fieldset" className={classes.formControl}>
+                                <FormLabel component="legend">Are you?</FormLabel>
+                                <RadioGroup
+                                    aria-label="Are you?"
+                                    name="attendance"
+                                    className={classes.group}
+                                    value={this.state.attendance}
+                                    onChange={this.handleSelectChange}
+                                >
+                                    <FormControlLabel value="interested" control={<Radio />} label="Interested" />
+                                    <FormControlLabel value="attending" control={<Radio />} label="Attending" />
+                                </RadioGroup>
+                            </FormControl>
                             </div>
                         </form>
                     </DialogContent>

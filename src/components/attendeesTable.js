@@ -49,10 +49,11 @@ const AttendeeTable = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell numeric>Email</TableCell>
+            <TableCell >Email</TableCell>
             <TableCell numeric>Phone</TableCell>
-            <TableCell numeric></TableCell>
-            <TableCell numeric></TableCell>
+            <TableCell> Attendance Type </TableCell>
+            <TableCell ></TableCell>
+            <TableCell ></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,10 +63,11 @@ const AttendeeTable = (props) => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell numeric>{row.email}</TableCell>
+                <TableCell >{row.email}</TableCell>
                 <TableCell numeric>{row.phone}</TableCell>
-                <TableCell numeric> <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
-                <TableCell numeric><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
+                <TableCell>  {row.attendance} </TableCell>
+                <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
+                <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
               </TableRow>
             );
           })}

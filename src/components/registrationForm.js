@@ -6,10 +6,11 @@ import { addAttendee } from '../actions/seminarActions'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Email from '@material-ui/icons/Email';
-import SmartPhone from '@material-ui/icons/Smartphone';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 
 const styles = theme => ({
@@ -23,7 +24,8 @@ class RegistrationForm extends Component {
   state = {
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      attendance: 'interested'
   }
 
   handleChange = (e) => {
@@ -31,6 +33,12 @@ class RegistrationForm extends Component {
           [e.target.id]: e.target.value
       })
   }
+
+  handleSelectChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+    }
 
   handleSubmit = (e) => {
       e.preventDefault();
@@ -60,6 +68,21 @@ class RegistrationForm extends Component {
                       <FormControl className={classes.formControl}>
                           <TextField required id="phone" label="Enter Phone Number" style={{width: 800}} multiline value={this.state.number} onChange={this.handleChange}/>
                       </FormControl>
+                  </div>
+                  <div>
+                  <FormControl component="fieldset" className={classes.formControl}>
+                    <FormLabel component="legend">Are you?</FormLabel>
+                    <RadioGroup
+                        aria-label="Are you?"
+                        name="attendance"
+                        className={classes.group}
+                        value={this.state.attendance}
+                        onChange={this.handleSelectChange}
+                    >
+                        <FormControlLabel value="interested" control={<Radio />} label="Interested" />
+                        <FormControlLabel value="attending" control={<Radio />} label="Attending" />
+                    </RadioGroup>
+                  </FormControl>
                   </div>
                   <br/><br/>
                     <FormControl className={classes.formControl}>
