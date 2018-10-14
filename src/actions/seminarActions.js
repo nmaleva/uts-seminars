@@ -70,3 +70,16 @@ export const updateSeminar = (seminarId, seminar) => {
         })
     }
 }
+
+export const updateAttendee = (seminarId, attendeeId, attendee) => {
+    return(dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('seminars/'+seminarId+'/attendees').doc(attendeeId).update(attendee).
+        then(() => {
+            dispatch({ type: 'UPDATE_ATTENDEE', attendee:attendee});
+            return window.location.reload();
+        }).catch((err) => {
+            dispatch({type:'UPDATE_ATTENDEE_ERROR', err});
+        })
+    }
+}
