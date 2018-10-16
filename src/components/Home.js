@@ -36,6 +36,7 @@ class Home extends Component {
                 case 'Date': str = seminar.date; break;
                 case 'Speaker': str = seminar.speaker; break;
                 case 'Organiser': str = seminar.organiser; break;
+                default: str = seminar.title; break;
             }
             console.log(str);
             if(str.includes(this.state.seminarFilter)){
