@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import firebase from 'firebase'
 
 const styles = {
   root: {
@@ -22,17 +25,9 @@ const styles = {
 };
 
 function Navbar(props)  {
-
+  const { auth } = props;
   const { classes } = props;
-
-  let loginBtn;
-  if (props.isLoggedIn) {
-    loginBtn = <Button color="inherit" component={Link} to="/login">Logout</Button>;
-  } else {
-    loginBtn = <Button color="inherit" component={Link} to="/login">Login</Button>;
-    console.log('nav -- logged out');
-  }
-
+  
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -42,9 +37,9 @@ function Navbar(props)  {
             UTS Seminars
           </Typography>
           <Button color="inherit" component={Link} to="/">All Seminars</Button>
-          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/my-seminars">My Seminars</Button>) }
-          {props.isLoggedIn && (<Button color="inherit" component={Link} to="/create-seminar">Create Seminar</Button>) }
-          {loginBtn}
+          {auth.uid && <Button color="inherit" component={Link} to="/my-seminars">My Seminars</Button>}
+          <Button color="inherit" component={Link} to="/login">{auth.uid ? 'My Account' : 'Login'}</Button>
+          {auth.uid && (<Button color="inherit" component={Link} to="/" onClick={() => firebase.auth().signOut()}>Logout</Button>)}
         </Toolbar>
       </AppBar>
     </div>
@@ -55,4 +50,10 @@ Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navbar);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+}
+
+export default compose(connect(mapStateToProps),withStyles(styles))(Navbar)

@@ -15,7 +15,7 @@ import firebase from 'firebase'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {isLoggedIn: false};
+    //this.state = {isLoggedIn: false};
   }
 
   simpleAction = (event) => {
@@ -24,20 +24,20 @@ class App extends Component {
    }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({isLoggedIn: true});
-      } else {
-        this.setState({isLoggedIn: false});
-      }
-    });
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({isLoggedIn: true});
+    //   } else {
+    //     this.setState({isLoggedIn: false});
+    //   }
+    // });
   }
 
   render() {
     return (
       <BrowserRouter>
       <div className="App">  
-        <Navbar isLoggedIn={this.state.isLoggedIn} />
+        <Navbar/>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/seminar-details/:id" component={SeminarDetails} />
