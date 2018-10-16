@@ -25,8 +25,11 @@ class RegistrationForm extends Component {
       name: '',
       email: '',
       phone: '',
-      attendance: 'interested'
+      attendance: 'interested',
+      error: ''
   }
+
+  error = '';
 
   handleChange = (e) => {
       this.setState({
@@ -40,20 +43,38 @@ class RegistrationForm extends Component {
     })
     }
 
-  handleSubmit = (e) => {
+    handleSubmit = (e) => {
       e.preventDefault();
-      this.props.addAttendee(this.state,this.props.seminarId);
-  }
+      let attendees = this.props.attendees;
+      let email = this.state.email;
+      console.log(attendees);
+      console.log(Object.attendees);
+      console.log(this.state);
+      let exists = Object.keys(attendees).filter(function(i){
+          console.log(attendees[i].email);
+          console.log(email)
+          return attendees[i].email === email
+        }).length>0;
+      
+        if(!exists) {
+            let attendee = {name:this.state.name, email:this.state.email, phone:this.state.phone, attendance:this.state.attendance}
+            this.props.addAttendee(attendee,this.props.seminarId);
+      } else {
+            this.setState({error: "This Email has already been recorded for this seminar!"});
+      }
+    }
+
+  
 
   render() {
       const {name, email, phone} = this.state;
       const {classes} = this.props;
       const isEnabled = name != '' && email != '' && phone != ''; 
       
-      console.log(this.props)
 
       return (
           <div>
+              {this.state.error}
               <form style={{width: '100%' }}>
                   
                   <div>

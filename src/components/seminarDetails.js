@@ -13,7 +13,8 @@ const SeminarDetails = (props) => {
     //grab ID of seminar from url parameters
     const id = props.match.params.id
     console.log(props);
-    const {seminar} = props;
+    const {seminar,attendees} = props;
+   // console.log(attendees);
 
     //Grab seminar from seminar list in state
    // const seminar = props.seminars.find(seminar => id == seminar.id)
@@ -24,7 +25,7 @@ const SeminarDetails = (props) => {
                 < SeminarDetailsContent seminar={seminar} />
 
                 <h2> Register Attendance </h2>
-                < RegistrationForm seminarId={id}/>
+                < RegistrationForm attendees={attendees} seminarId={id}/>
                 <br/>
                 <h2> List of Attendees </h2>
                 < AttendeeTable seminarId={id}/>
@@ -45,12 +46,14 @@ const mapStateToProps = (state, ownProps) => {
     const seminars = state.firestore.data.seminars;
     const seminar = seminars ? seminars[id] : null
     return {
-        seminar: seminar
+        seminar: seminar,
+        attendees: (state.firestore.data['seminars/'+id+'/attendees']) ? state.firestore.data['seminars/'+id+'/attendees'] : []
     }
 }
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'seminars' }
+    firestoreConnect( (props) => [
+        { collection: 'seminars' },
+        { collection: 'seminars/'+ props.match.params.id +'/attendees'}
     ])
 )(SeminarDetails)
