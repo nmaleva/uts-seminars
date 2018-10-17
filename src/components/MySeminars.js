@@ -8,6 +8,8 @@ import { compose } from 'redux'
 import firebase from 'firebase'
 
 class MySeminars extends Component {
+    
+    
     render() {
         const {mySeminars} = this.props;
         console.log(mySeminars);
@@ -22,13 +24,14 @@ class MySeminars extends Component {
 
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
-    let userId = firebase.auth().currentUser.uid;
+    let userId = state.firebase.auth.uid; /*firebase.auth().currentUser.uid;*/
     console.log(state);
 
     let seminars = state.firestore.data.seminars;
+    console.log("Seminars-" + seminars);
     let mySeminars = [];
-    console.log(seminars);
-    if(seminars !== undefined) {
+
+    if(seminars != undefined) {
         mySeminars = Object.keys(seminars).map(seminarId => {
             console.log(seminars[seminarId].organiser);
             if(seminars[seminarId].organiser === userId ){
@@ -36,23 +39,25 @@ const mapStateToProps = (state) => {
                 return seminars[seminarId];
             }
         });
-
+    
         Array.prototype.clean = function(deleteValue) {
             for (var i = 0; i < this.length; i++) {
-            if (this[i] == deleteValue) {         
+              if (this[i] == deleteValue) {         
                 this.splice(i, 1);
                 i--;
-            }
+              }
             }
             return this;
         };
-        
-
+          
+    
             //
         //const seminar = seminars ? seminars[id] : null
-
+    
         mySeminars.clean(undefined);
+    
     }
+    
 
     return {
         mySeminars: mySeminars

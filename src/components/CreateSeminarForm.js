@@ -77,6 +77,7 @@ class CreateSeminarForm extends Component {
         console.log(venues);
         const {title, abstract, speaker, host, venue, duration} = this.state;
         const {classes} = this.props;
+        const {auth} = this.props;
         const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
          * Items below are used to populate the selects 
@@ -110,6 +111,12 @@ class CreateSeminarForm extends Component {
                     </div>
                     <div>
                         <div>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel>Organiser</InputLabel>
+                                <Select value={auth.displayName}>
+                                    <MenuItem value={auth.displayName}><em>{auth.displayName}</em></MenuItem>
+                                </Select>
+                            </FormControl>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="host-id">Select Host</InputLabel>
                                 <Select value={this.state.host} onChange={this.handleSelectChange}
@@ -160,7 +167,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createSeminar: (seminar) => dispatch(createSeminar(seminar))
+        createSeminar: (seminar) => dispatch(createSeminar(seminar)),
     }
 }
 
