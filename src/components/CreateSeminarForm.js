@@ -76,7 +76,9 @@ class CreateSeminarForm extends Component {
         console.log(hosts);
         console.log(venues);
         const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes} = this.props;
+        const {classes, users} = this.props;
+        console.log(users);
+        console.log(firebase.auth().currentUser)
         const {auth} = this.props;
         const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
@@ -91,6 +93,7 @@ class CreateSeminarForm extends Component {
             <div>
                 <form style={{width: '100%' }}>
                     <h1> Create Seminar </h1>
+                    <div> <b> Organiser: </b> {firebase.auth().currentUser.displayName} </div>
                     <div>
                         <FormControl className={classes.formControl}>       
                             <TextField style={{width: 500}} required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange}/>
@@ -111,12 +114,12 @@ class CreateSeminarForm extends Component {
                     </div>
                     <div>
                         <div>
-                            <FormControl className={classes.formControl}>
+                            {/* <FormControl className={classes.formControl}>
                                 <InputLabel>Organiser</InputLabel>
                                 <Select value={auth.displayName}>
                                     <MenuItem value={auth.displayName}><em>{auth.displayName}</em></MenuItem>
                                 </Select>
-                            </FormControl>
+                            </FormControl> */}
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="host-id">Select Host</InputLabel>
                                 <Select value={this.state.host} onChange={this.handleSelectChange}
