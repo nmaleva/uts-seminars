@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
 import { createSeminar } from '../actions/seminarActions'
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button'
@@ -37,6 +39,8 @@ class SeminarUpdate extends Component {
         speaker: this.props.seminar.speaker,
         time: this.props.seminar.time,
         venue: this.props.seminar.venue,
+        organiser: this.props.seminar.organiser,
+        organiserName: this.props.seminar.organiserName,
         open:false
     }
 
@@ -64,7 +68,9 @@ class SeminarUpdate extends Component {
             host: this.state.host,
             speaker: this.state.speaker,
             time: this.state.time,
-            venue: this.state.venue
+            venue: this.state.venue,
+            organiser: this.state.organiser,
+            organiserName: this.props.users[this.state.organiser].name
         }
         this.props.updateSeminar(this.props.seminarId, updatedSeminar)
         this.handleClose();
@@ -84,7 +90,9 @@ class SeminarUpdate extends Component {
 
     render() {
         const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes} = this.props;
+        console.log(this.state);
+        console.log(this.props);
+        const {classes, users} = this.props;
         const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
          * Items below are used to populate the selects 
@@ -92,7 +100,7 @@ class SeminarUpdate extends Component {
          */
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
         const venueItems = venues.map((venue, i) => <MenuItem key={i} value={venue}> {venue} </MenuItem>);
-        console.log(this.props)
+        const userItems = Object.keys(users).map(i =>  <MenuItem key={i} value={users[i].id}> {users[i].name} </MenuItem>)
 
         return (
             <div>
@@ -140,6 +148,16 @@ class SeminarUpdate extends Component {
                                             {venueItems}
                                         </Select>
                                     </FormControl>
+
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="organiser">Change Organiser</InputLabel>
+                                        <Select name="organiser" value={this.state.organiser} onChange={this.handleSelectChange}>
+                                            <MenuItem value=""><em>None</em></MenuItem>
+                                            {userItems}
+                                        </Select>
+                                    </FormControl>
+
+
                                     <FormControl className={classes.formControl}>
                                         <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange}/>
                                     </FormControl>
@@ -164,10 +182,22 @@ class SeminarUpdate extends Component {
 
 }
 
+const mapStateToProps = (state, ownProps) => {
+    console.log(state);
+    const users = (state.firestore.data.users)?state.firestore.data.users : [];
+    return {
+        users: users
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         updateSeminar: (seminarId, seminar) => dispatch(updateSeminar(seminarId,seminar))
     }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(SeminarUpdate))
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    firestoreConnect([{ collection: 'users' }]),
+    withStyles(styles)
+)(SeminarUpdate)
