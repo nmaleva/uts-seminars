@@ -29,7 +29,6 @@ const MySeminarDetails = (props) => {
                 <DeleteSeminar id={id}/>
                 < RegistrationForm attendees={attendees} seminarId={id}/>
                 < AttendeeTable seminarId={id}/>
-                <Button></Button>
             </div>
         )
     } else if (seminar == null) {
