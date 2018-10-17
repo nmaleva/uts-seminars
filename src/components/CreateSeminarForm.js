@@ -64,6 +64,7 @@ class CreateSeminarForm extends Component {
             speaker: this.state.speaker,
             speakerBio: this.state.speakerBio,
             time: this.state.time,
+            venueIdx: this.state.venueIdx,
             venue: venues[this.state.venueIdx].venue,
             capacity: venues[this.state.venueIdx].capacity,
             organiser: this.state.organiser,
@@ -114,12 +115,6 @@ class CreateSeminarForm extends Component {
                     </div>
                     <div>
                         <div>
-                            {/* <FormControl className={classes.formControl}>
-                                <InputLabel>Organiser</InputLabel>
-                                <Select value={auth.displayName}>
-                                    <MenuItem value={auth.displayName}><em>{auth.displayName}</em></MenuItem>
-                                </Select>
-                            </FormControl> */}
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="host-id">Select Host</InputLabel>
                                 <Select value={this.state.host} onChange={this.handleSelectChange}

@@ -38,7 +38,7 @@ class SeminarUpdate extends Component {
         host: this.props.seminar.host,
         speaker: this.props.seminar.speaker,
         time: this.props.seminar.time,
-        venue: this.props.seminar.venue,
+        venueIdx: this.props.seminar.venueIdx,
         organiser: this.props.seminar.organiser,
         organiserName: this.props.seminar.organiserName,
         open:false
@@ -68,7 +68,9 @@ class SeminarUpdate extends Component {
             host: this.state.host,
             speaker: this.state.speaker,
             time: this.state.time,
-            venue: this.state.venue,
+            venueIdx: this.state.venueIdx,
+            venue: venues[this.state.venueIdx].venue,
+            capacity: venues[this.state.venueIdx].capacity,
             organiser: this.state.organiser,
             organiserName: this.props.users[this.state.organiser].name
         }
@@ -99,8 +101,8 @@ class SeminarUpdate extends Component {
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
          */
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
-        const venueItems = venues.map((venue, i) => <MenuItem key={i} value={venue}> {venue} </MenuItem>);
-        const userItems = Object.keys(users).map(i =>  <MenuItem key={i} value={users[i].id}> {users[i].name} </MenuItem>)
+        const venueItems = Object.keys(venues).map(i => <MenuItem key={i} value={i}> {venues[i].venue} - {venues[i].capacity} cap </MenuItem>);
+        const userItems = Object.keys(users).map(i => <MenuItem key={i} value={users[i].id}> {users[i].name} </MenuItem>)
 
         return (
             <div>
@@ -142,8 +144,8 @@ class SeminarUpdate extends Component {
                                     </FormControl>
 
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel htmlFor="venue">Select Venue</InputLabel>
-                                        <Select name="venue" value={this.state.venue} onChange={this.handleSelectChange}>
+                                        <InputLabel htmlFor="venueIdx">Select Venue</InputLabel>
+                                        <Select name="venueIdx" value={this.state.venueIdx} onChange={this.handleSelectChange}>
                                             <MenuItem value=""><em>None</em></MenuItem>
                                             {venueItems}
                                         </Select>
