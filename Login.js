@@ -97,12 +97,6 @@ class Login extends Component {
               phone: ""
             })
           }
-          // console.log(this.state.uid);
-          // console.log(this.state.displayname);
-          // console.log(this.state.loginEmail);
-          // console.log(this.state.name);
-          // console.log(this.state.email);
-          // console.log(this.state.phone);
         });  
         
   }
@@ -133,10 +127,8 @@ class Login extends Component {
     });
     // Update details in firebase login data
     var user = firebase.auth().currentUser;
-    //console.log(user)
     user.updateEmail(this.state.email).then(function() {
       //success
-      //console.log(user.email);
     }).catch(function(err){ 
       //error
       console.log("ERROR -- Updating Email")
@@ -145,7 +137,6 @@ class Login extends Component {
       displayName: this.state.name
     }).then(function(){
       //success
-      //console.log(user.displayName);
     }).catch(function(err) {
       //error
       console.log("ERROR -- Updating Display Name")

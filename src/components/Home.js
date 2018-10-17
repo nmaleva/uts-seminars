@@ -24,12 +24,9 @@ class Home extends Component {
         this.setState({
             seminarFilter: e.target.value
         })
-        console.log(this.state.seminarFilter)
         const {type} = this.state;
         let filteredSeminars = this.props.seminars;
-        //console.log(filteredSeminars)
         filteredSeminars = filteredSeminars.filter((seminar) => {
-            //console.log(seminar);
             var str;
             switch(type){
                 case 'Venue': str = seminar.venue; break;
@@ -38,23 +35,18 @@ class Home extends Component {
                 case 'Organiser': str = seminar.organiser; break;
                 default: str = seminar.title; break;
             }
-            console.log(str);
             if(str.includes(this.state.seminarFilter)){
-                console.log(seminar);
                 return seminar;
             }
         })
-        console.log(this.state.filteredSeminars)
         this.setState({filteredSeminars})
     }
 
     handleSelectChange = event => {
         this.setState({type: event.target.value});
-        //console.log(this.state.type);
     }
 
     render() {
-        //console.log(this.props);
         const {seminars} = this.props;
         if(this.state.seminarFilter == ""){
             if(seminars.length != 0 && this.state.loaded){
@@ -113,7 +105,6 @@ class Home extends Component {
 
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars : []
     }

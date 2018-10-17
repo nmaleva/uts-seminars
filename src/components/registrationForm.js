@@ -47,21 +47,16 @@ class RegistrationForm extends Component {
       e.preventDefault();
       let attendees = this.props.attendees;
       let email = this.state.email;
-      console.log(attendees);
-      console.log(Object.attendees);
-      console.log(this.state);
       let exists = Object.keys(attendees).filter(function(i){
-          console.log(attendees[i].email);
-          console.log(email)
           return attendees[i].email === email
         }).length>0;
       
         if(!exists) {
             let attendee = {name:this.state.name, email:this.state.email, phone:this.state.phone, attendance:this.state.attendance}
             this.props.addAttendee(attendee,this.props.seminarId);
-      } else {
+        } else {
             this.setState({error: "This Email has already been recorded for this seminar!"});
-      }
+        }
     }
 
   

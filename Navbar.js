@@ -29,10 +29,8 @@ function Navbar(props)  {
   let loginBtn;
   if (props.isLoggedIn) {
     loginBtn = <Button color="inherit" onClick={ () => firebase.auth().signOut() }>Logout</Button>;
-    console.log(props.isLoggedIn)
   } else {
     loginBtn = <Button color="inherit" component={Link} to="/login">Login</Button>;
-    //console.log('nav -- logged out');
   }
 
   return (
