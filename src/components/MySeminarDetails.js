@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button'
 const MySeminarDetails = (props) => {
     //grab ID of seminar from url parameters
     const id = props.match.params.id
-    const {seminar} = props;
+    const {seminar, attendees} = props;
 
     //Grab seminar from seminar list in state
    // const seminar = props.seminars.find(seminar => id == seminar.id)
@@ -27,7 +27,7 @@ const MySeminarDetails = (props) => {
                 < SeminarUpdate seminarId= {id} seminar={seminar}/> 
                 <br/>
                 <DeleteSeminar id={id}/>
-                < RegistrationForm seminarId={id}/>
+                < RegistrationForm attendees={attendees} seminarId={id}/>
                 < AttendeeTable seminarId={id}/>
                 <Button></Button>
             </div>
@@ -46,12 +46,14 @@ const mapStateToProps = (state, ownProps) => {
     const seminars = state.firestore.data.seminars;
     const seminar = seminars ? seminars[id] : null
     return {
-        seminar: seminar
+        seminar: seminar,
+        attendees: (state.firestore.data['seminars/'+id+'/attendees']) ? state.firestore.data['seminars/'+id+'/attendees'] : []
     }
 }
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'seminars' }
+    firestoreConnect((props) => [
+        { collection: 'seminars' },
+        { collection: 'seminars/'+ props.match.params.id +'/attendees'}
     ])
 )(MySeminarDetails)
