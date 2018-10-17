@@ -36,6 +36,8 @@ const AttendeeTable = (props) => {
   //seminarId = this.props.seminarId;
   console.log(props);
   let rows = props.attendees;
+  let rowLength  = rows.length
+  console.log(rows)
   let rowsArr = Object.keys(rows).map(key => {
     rows[key].id = key;
     return rows[key];
@@ -44,36 +46,39 @@ const AttendeeTable = (props) => {
   //console.log(props.seminar.attendees);
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell >Email</TableCell>
-            <TableCell numeric>Phone</TableCell>
-            <TableCell> Attendance Type </TableCell>
-            <TableCell ></TableCell>
-            <TableCell ></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsArr.map(row => {
-            return (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell >{row.email}</TableCell>
-                <TableCell numeric>{row.phone}</TableCell>
-                <TableCell>  {row.attendance} </TableCell>
-                <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
-                <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+    <div>
+      Number of Attendees: {rowsArr.length}
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell >Email</TableCell>
+              <TableCell numeric>Phone</TableCell>
+              <TableCell> Attendance Type </TableCell>
+              <TableCell ></TableCell>
+              <TableCell ></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsArr.map(row => {
+              return (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell >{row.email}</TableCell>
+                  <TableCell numeric>{row.phone}</TableCell>
+                  <TableCell>  {row.attendance} </TableCell>
+                  <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
+                  <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
   );
 }
 

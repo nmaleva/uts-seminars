@@ -26,31 +26,33 @@ const mapStateToProps = (state) => {
     console.log(state);
 
     let seminars = state.firestore.data.seminars;
+    let mySeminars = [];
     console.log(seminars);
-    const mySeminars = Object.keys(seminars).map(seminarId => {
-        console.log(seminars[seminarId].organiser);
-        if(seminars[seminarId].organiser === userId ){
-            seminars[seminarId].id = seminarId;
-            return seminars[seminarId];
-        }
-    });
+    if(seminars !== undefined) {
+        mySeminars = Object.keys(seminars).map(seminarId => {
+            console.log(seminars[seminarId].organiser);
+            if(seminars[seminarId].organiser === userId ){
+                seminars[seminarId].id = seminarId;
+                return seminars[seminarId];
+            }
+        });
 
-    Array.prototype.clean = function(deleteValue) {
-        for (var i = 0; i < this.length; i++) {
-          if (this[i] == deleteValue) {         
-            this.splice(i, 1);
-            i--;
-          }
-        }
-        return this;
-    };
-      
+        Array.prototype.clean = function(deleteValue) {
+            for (var i = 0; i < this.length; i++) {
+            if (this[i] == deleteValue) {         
+                this.splice(i, 1);
+                i--;
+            }
+            }
+            return this;
+        };
+        
 
-        //
-    //const seminar = seminars ? seminars[id] : null
+            //
+        //const seminar = seminars ? seminars[id] : null
 
-    mySeminars.clean(undefined);
-
+        mySeminars.clean(undefined);
+    }
 
     return {
         mySeminars: mySeminars
