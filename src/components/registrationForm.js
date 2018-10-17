@@ -22,6 +22,9 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'nowrap',
         flexDirection: 'row',
+    },
+    errText: {
+        color:'red'
     }
 });
 
@@ -75,7 +78,7 @@ class RegistrationForm extends Component {
 
       return (
           <div>
-              {this.state.error}
+              <div className={classes.errText}>{this.state.error}</div>
               <form style={{width: '100%' }}>
                   
                   <div>

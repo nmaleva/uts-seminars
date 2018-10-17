@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     row: {
-        width: '30%',
+        width: '500px',
         margin:'auto'
     },
     container: {
