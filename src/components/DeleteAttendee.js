@@ -46,8 +46,6 @@ class DeleteAttendee extends Component {
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             The attendee will no longer be able to participate in this seminar once deleted!
-                            attendeeId - {this.state.id}
-                            seminarId = {this.state.seminarId}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

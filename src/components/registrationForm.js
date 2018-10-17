@@ -89,13 +89,15 @@ class RegistrationForm extends Component {
                           <TextField style={{width: 500}} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange}/>
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                          <TextField id="email" label="Enter Email"  style={{width: 300}}  value={this.state.email} onChange={this.handleChange}/>
+                          <TextField required id="phone" label="Enter Phone Number" style={{width: 300}} multiline value={this.state.number} onChange={this.handleChange}/>
                       </FormControl>
+                      
                   </div>
+                        <FormControl className={classes.formControl}>
+                            <TextField required id="email" label="Enter Email"  style={{width: 815}}  value={this.state.email} onChange={this.handleChange}/>
+                        </FormControl>
                   <div>
-                      <FormControl className={classes.formControl}>
-                          <TextField required id="phone" label="Enter Phone Number" style={{width: 800}} multiline value={this.state.number} onChange={this.handleChange}/>
-                      </FormControl>
+                      
                   </div>
                   <div>
                   <FormControl component="fieldset" className={classes.formControl}>

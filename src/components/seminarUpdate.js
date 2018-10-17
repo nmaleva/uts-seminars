@@ -37,6 +37,7 @@ class SeminarUpdate extends Component {
         duration: this.props.seminar.duration,
         host: this.props.seminar.host,
         speaker: this.props.seminar.speaker,
+        speakerBio: this.props.seminar.speakerBio,
         time: this.props.seminar.time,
         venueIdx: this.props.seminar.venueIdx,
         organiser: this.props.seminar.organiser,
@@ -67,6 +68,7 @@ class SeminarUpdate extends Component {
             duration: this.state.duration,
             host: this.state.host,
             speaker: this.state.speaker,
+            speaker:this.state.speakerBio,
             time: this.state.time,
             venueIdx: this.state.venueIdx,
             venue: venues[this.state.venueIdx].venue,
@@ -128,7 +130,12 @@ class SeminarUpdate extends Component {
                             </div>
                             <div>
                                 <FormControl className={classes.formControl}>
-                                    <TextField required id="abstract" label="Enter Abstract" style={{width: 800}} multiline value={this.state.abstract} onChange={this.handleChange}/>
+                                    <TextField required id="abstract" label="Enter Speaker Biography" style={{width: 500}} multiline value={this.state.speakerBio} onChange={this.handleChange}/>
+                                </FormControl>
+                            </div>
+                            <div>
+                                <FormControl className={classes.formControl}>
+                                    <TextField required id="abstract" label="Enter Abstract" style={{width: 500}} multiline value={this.state.abstract} onChange={this.handleChange}/>
                                 </FormControl>
                             </div>
                             <div>
@@ -176,8 +183,8 @@ class SeminarUpdate extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                    <Button disabled={!isEnabled} variant="contained" color="primary" className={classes.button} onClick={this.handleSubmit}> Update </Button>
-                    <Button disabled={!isEnabled} variant="contained" color="primary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
+                    <Button disabled={!isEnabled} variant="contained" color="default" className={classes.button} onClick={this.handleSubmit}> Update </Button>
+                    <Button disabled={!isEnabled} variant="contained" color="secondary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
                     </DialogActions>
                 </Dialog>
             </div>
