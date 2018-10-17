@@ -18,6 +18,7 @@ const MySeminarDetails = (props) => {
 
     //Grab seminar from seminar list in state
    // const seminar = props.seminars.find(seminar => id == seminar.id)
+    console.log(seminar);
     if(seminar != null) {
         return (
             <div className="container">
@@ -28,6 +29,7 @@ const MySeminarDetails = (props) => {
                 <DeleteSeminar id={id}/>
                 < RegistrationForm attendees={attendees} seminarId={id}/>
                 < AttendeeTable seminarId={id}/>
+                <Button></Button>
             </div>
         )
     } else if (seminar == null) {

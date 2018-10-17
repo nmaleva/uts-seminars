@@ -59,6 +59,7 @@ class SeminarUpdate extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.props);
         let updatedSeminar = {
             title: this.state.title,
             abstract: this.state.abstract,
@@ -91,6 +92,8 @@ class SeminarUpdate extends Component {
 
     render() {
         const {title, abstract, speaker, host, venue, duration} = this.state;
+        console.log(this.state);
+        console.log(this.props);
         const {classes, users} = this.props;
         const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
@@ -182,6 +185,7 @@ class SeminarUpdate extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log(state);
     const users = (state.firestore.data.users)?state.firestore.data.users : [];
     return {
         users: users

@@ -29,11 +29,19 @@ const AttendeeTable = (props) => {
   
   const { classes } = props;
   const id = props.seminarId;
+
+  
+  
+  
+  //seminarId = this.props.seminarId;
+  console.log(props);
   let rows = props.attendees;
   let rowsArr = Object.keys(rows).map(key => {
     rows[key].id = key;
     return rows[key];
   });
+  console.log(rowsArr);
+  //console.log(props.seminar.attendees);
 
   return (
     <Paper className={classes.root}>
@@ -76,6 +84,7 @@ AttendeeTable.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   const id = ownProps.seminarId;
   const seminars = state.firestore.data.seminars;
   const seminar = seminars ? seminars[id] : null

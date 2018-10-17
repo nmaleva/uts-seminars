@@ -12,6 +12,7 @@ class MySeminars extends Component {
     
     render() {
         const {mySeminars} = this.props;
+        console.log(mySeminars);
         return (
             <div className="home container">
                 <h2>My Seminars</h2>
@@ -24,12 +25,15 @@ class MySeminars extends Component {
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
     let userId = state.firebase.auth.uid; /*firebase.auth().currentUser.uid;*/
+    console.log(state);
 
     let seminars = state.firestore.data.seminars;
+    console.log("Seminars-" + seminars);
     let mySeminars = [];
 
     if(seminars != undefined) {
         mySeminars = Object.keys(seminars).map(seminarId => {
+            console.log(seminars[seminarId].organiser);
             if(seminars[seminarId].organiser === userId ){
                 seminars[seminarId].id = seminarId;
                 return seminars[seminarId];

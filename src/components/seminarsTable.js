@@ -120,6 +120,14 @@ const styles = theme => ({
 
 class SeminarsTable extends React.Component {
   //Grabbing projects from store that was passed down in Home Component
+  // constructor(props) {
+  //   super(props);
+  //   //this.state.rows = seminars
+  //   //const {seminars} = this.props;
+  //   this.state.rows = this.props.seminars
+  //   console.log(props);
+  // }
+
 
   state = {
     page: 0,
@@ -139,6 +147,8 @@ class SeminarsTable extends React.Component {
     const { rowsPerPage, page } = this.state;
     const rows = this.props.seminars;
     const pageLink = this.props.seminarPageLink;
+    //console.log(this.props);
+    console.log(rows);
     // const page = 0;
     // const rowsPerPage = 5;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -163,7 +173,7 @@ class SeminarsTable extends React.Component {
                 return (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                      {row.title}
+                    <a href={pageLink + row.id}>{row.title}</a>
                     </TableCell>
                     <TableCell >{row.abstract}</TableCell>
                     <TableCell >{row.venue}</TableCell>
