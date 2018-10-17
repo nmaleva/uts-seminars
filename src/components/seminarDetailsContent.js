@@ -13,17 +13,19 @@ const SeminarDetailsContent = (props) => {
 
             <b> Abstract: </b> {seminar.abstract}
             <br/>
-            <b>  Room: </b> {seminar.venue}
+            <b> Room: </b> {seminar.venue}
             <br/>
-            <b>  Speaker: </b> {seminar.speaker}
+            <b> Speaker: </b> {seminar.speaker}
             <br/>
+            <b> Speaker Bio: </b> {seminar.speakerBio}
+            <br/> 
             <b> Host </b> {seminar.host}
             <br/> 
             <b> Date </b> {seminar.date}
             <br/> 
             <b> Time </b> {seminar.time}
             <br/> 
-            <b> duration </b> {seminar.duration} minutes
+            <b> Duration </b> {seminar.duration} minutes
             <br/> 
         </div>
     )

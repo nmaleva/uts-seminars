@@ -29,8 +29,9 @@ class CreateSeminarForm extends Component {
         duration: 0,
         host: '',
         speaker: '',
+        speakerBio: '',
         time: moment().format("HH:mm"),
-        venue: ''
+        venue: '',
     }
 
     handleChange = (e) => {
@@ -58,6 +59,7 @@ class CreateSeminarForm extends Component {
         console.log(venues);
         const {title, abstract, speaker, host, venue, duration} = this.state;
         const {classes} = this.props;
+        const {auth} = this.props;
         const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
         /**
          * Items below are used to populate the selects 
@@ -85,7 +87,18 @@ class CreateSeminarForm extends Component {
                         </FormControl>
                     </div>
                     <div>
+                        <FormControl className={classes.formControl}>
+                            <TextField required id="speakerBio" label="Enter Speaker Bio" style={{width: 800}} multiline value={this.state.speakerBio} onChange={this.handleChange}/>
+                        </FormControl>
+                    </div>
+                    <div>
                         <div>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel>Organiser</InputLabel>
+                                <Select value={auth.displayName}>
+                                    <MenuItem value={auth.displayName}><em>{auth.displayName}</em></MenuItem>
+                                </Select>
+                            </FormControl>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="host-id">Select Host</InputLabel>
                                 <Select value={this.state.host} onChange={this.handleSelectChange}
@@ -126,10 +139,15 @@ class CreateSeminarForm extends Component {
 
 }
 
+const mapStateToProps = (state) => {
+    return {
+      auth: state.firebase.auth
+    }
+  }
 const mapDispatchToProps = (dispatch) => {
     return {
-        createSeminar: (seminar) => dispatch(createSeminar(seminar))
+        createSeminar: (seminar) => dispatch(createSeminar(seminar)),
     }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(CreateSeminarForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateSeminarForm))

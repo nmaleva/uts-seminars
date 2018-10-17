@@ -96,6 +96,20 @@ class Login extends Component {
               email: doc.data().email,
               phone: doc.data().phone
             }))
+            console.log(this.state);
+            if (this.state.name != this.state.displayname || this.state.email != this.state.loginEmail) {
+              //New user/corrupted data -- update DB
+              const db = firebase.firestore();
+              db.settings({
+                timestampsInSnapshots: true
+              });
+
+              db.doc('users/'+this.state.uid).set({
+                  name: this.state.displayname,
+                  email: this.state.loginEmail,
+                  //phone: this.state.phone
+              });
+            }
           } else {
             // No user selected
             this.setState({
@@ -107,12 +121,7 @@ class Login extends Component {
               phone: ""
             })
           }
-          // console.log(this.state.uid);
-          // console.log(this.state.displayname);
-          // console.log(this.state.loginEmail);
-          // console.log(this.state.name);
-          // console.log(this.state.email);
-          // console.log(this.state.phone);
+
         });  
         
   }
@@ -121,6 +130,11 @@ class Login extends Component {
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
+
+ componentDidUpdate() {
+   console.log(this.state);
+
+ }
 
   updateInput = e => {
     this.setState({
@@ -136,9 +150,10 @@ class Login extends Component {
       timestampsInSnapshots: true
     });
     // Add updated details to user collection
+    
     db.doc('users/'+this.state.uid).set({
         name: this.state.name,
-        //email: this.state.email,
+        email: this.state.email,
         phone: this.state.phone
     });
     // Update details in firebase login data

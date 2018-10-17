@@ -38,7 +38,7 @@ function Navbar(props)  {
           </Typography>
           <Button color="inherit" component={Link} to="/">All Seminars</Button>
           {auth.uid && <Button color="inherit" component={Link} to="/my-seminars">My Seminars</Button>}
-          {auth.uid && <Button color="inherit" component={Link} to="/create-seminar">Add Seminar</Button>}
+          {auth.uid && <Button color="inherit" component={Link} to="/create-seminar">Create Seminar</Button>}
           <Button color="inherit" component={Link} to="/login">{auth.uid ? 'My Account' : 'Login'}</Button>
           {auth.uid && (<Button color="inherit" component={Link} to="/" onClick={() => firebase.auth().signOut()}>Logout</Button>)}
         </Toolbar>
