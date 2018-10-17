@@ -9,7 +9,7 @@ import DeleteSeminar from './DeleteSeminar'
 import SeminarUpdate from './seminarUpdate'
 import SeminarDetailsContent from './seminarDetailsContent'
 import Button from '@material-ui/core/Button'
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+// import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 
 const MySeminarDetails = (props) => {
@@ -25,12 +25,9 @@ const MySeminarDetails = (props) => {
             <div className="container">
                 < SeminarDetailsContent seminar={seminar} />
                 < SeminarUpdate seminarId= {id} seminar={seminar}/> 
- 
-                <DeleteSeminar id={id}/>
-
+                < DeleteSeminar id={id}/>
                 < RegistrationForm seminarId={id}/>
                 < AttendeeTable seminarId={id}/>
-                <Button></Button>
             </div>
         )
     } else if (seminar == null) {
