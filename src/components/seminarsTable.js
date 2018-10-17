@@ -164,6 +164,7 @@ class SeminarsTable extends React.Component {
                 <TableCell >Venue</TableCell>
                 <TableCell >Date</TableCell>
                 <TableCell >Speaker</TableCell>
+                <TableCell >Organiser</TableCell>
                 <TableCell >More Info </TableCell>
               </TableRow>
             </TableHead>
@@ -178,6 +179,7 @@ class SeminarsTable extends React.Component {
                     <TableCell >{row.venue}</TableCell>
                     <TableCell >{row.date}</TableCell>
                     <TableCell >{row.speaker}</TableCell>
+                    <TableCell >{row.organiserName}</TableCell>
                     <TableCell> <a href={pageLink + row.id}> More Info</a> </TableCell>
                   </TableRow>
                 );

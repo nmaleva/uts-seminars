@@ -11,9 +11,11 @@ const SeminarDetailsContent = (props) => {
         <div className="container">
             <h1> {seminar.title} </h1>
 
+            <b> Organiser: </b> {seminar.organiserName}
+            <br/>
             <b> Abstract: </b> {seminar.abstract}
             <br/>
-            <b> Room: </b> {seminar.venue}
+            <b> Venue: </b> {seminar.venue} with {seminar.capacity} people capacity
             <br/>
             <b> Speaker: </b> {seminar.speaker}
             <br/>
