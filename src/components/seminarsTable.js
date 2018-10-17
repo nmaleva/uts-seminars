@@ -123,7 +123,7 @@ class SeminarsTable extends React.Component {
 
   state = {
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
 
   handleChangePage = (event, page) => {

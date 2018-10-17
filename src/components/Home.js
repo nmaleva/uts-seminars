@@ -57,22 +57,25 @@ class Home extends Component {
             }
             return (
                 <div className="home container">
-                    <h2>Welcome to Homepage!</h2>
-                    <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
-                    <Select
-                        value={this.state.type}
-                        onChange={this.handleSelectChange}
-                        name="age"
-                        displayEmpty
-                    >
-                        <MenuItem value="" disabled>
-                            Filter Type
-                        </MenuItem>
-                        <MenuItem value={'Venue'}>Venue</MenuItem>
-                        <MenuItem value={'Date'}>Date</MenuItem>
-                        <MenuItem value={'Speaker'}>Speaker</MenuItem>
-                        <MenuItem value={'Organiser'}>Organiser</MenuItem>
-                    </Select>
+                    <h2>Browse UTS Seminars</h2>
+                    <div style={{float:'right'}}>
+                        <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
+                            <Select
+                                value={this.state.type}
+                                onChange={this.handleSelectChange}
+                                name="age"
+                                displayEmpty
+                            >
+                                <MenuItem value="" disabled>
+                                    Filter Type
+                                </MenuItem>
+                                <MenuItem value={'Venue'}>Venue</MenuItem>
+                                <MenuItem value={'Date'}>Date</MenuItem>
+                                <MenuItem value={'Speaker'}>Speaker</MenuItem>
+                                <MenuItem value={'Organiser'}>Organiser</MenuItem>
+                        </Select>
+                    </div>
+                    <br/>
                     <SeminarsTable seminars={seminars} seminarPageLink="/seminar-details/"/>
                 </div>
             )
@@ -80,22 +83,25 @@ class Home extends Component {
         else{
             return (
                 <div className="home container">
-                    <h2>Welcome to Homepage!</h2>
-                    <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
-                    <Select
-                        value={this.state.type}
-                        onChange={this.handleSelectChange}
-                        name="age"
-                        displayEmpty
-                    >
-                        <MenuItem value="" disabled>
-                            Filter Type
-                        </MenuItem>
-                        <MenuItem value={'Venue'}>Venue</MenuItem>
-                        <MenuItem value={'Date'}>Date</MenuItem>
-                        <MenuItem value={'Speaker'}>Speaker</MenuItem>
-                        <MenuItem value={'Organiser'}>Organiser</MenuItem>
-                    </Select>
+                    <h2>Browse UTS Seminars</h2>
+                    <div style={{float:'right'}}>
+                        <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
+                        <Select
+                            value={this.state.type}
+                            onChange={this.handleSelectChange}
+                            name="age"
+                            displayEmpty
+                        >
+                            <MenuItem value="" disabled>
+                                Filter Type
+                            </MenuItem>
+                            <MenuItem value={'Venue'}>Venue</MenuItem>
+                            <MenuItem value={'Date'}>Date</MenuItem>
+                            <MenuItem value={'Speaker'}>Speaker</MenuItem>
+                            <MenuItem value={'Organiser'}>Organiser</MenuItem>
+                        </Select>
+                    </div>
+                    <br/>
                     <SeminarsTable seminars={this.state.filteredSeminars} seminarPageLink="/seminar-details/"/>
                 </div>
             )
