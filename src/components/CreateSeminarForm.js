@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createSeminar } from '../actions/seminarActions'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import firebase from 'firebase'
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -29,8 +32,10 @@ class CreateSeminarForm extends Component {
         duration: 0,
         host: '',
         speaker: '',
+        speakerBio: '',
         time: moment().format("HH:mm"),
-        venue: ''
+        organiser: firebase.auth().currentUser.uid,
+        venueIdx: '',
     }
 
     handleChange = (e) => {
@@ -50,7 +55,21 @@ class CreateSeminarForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         //console.log(this.props);
-        this.props.createSeminar(this.state)
+        let updatedSeminar = {
+            title: this.state.title,
+            abstract: this.state.abstract,
+            date: this.state.date,
+            duration: this.state.duration,
+            host: this.state.host,
+            speaker: this.state.speaker,
+            speakerBio: this.state.speakerBio,
+            time: this.state.time,
+            venue: venues[this.state.venueIdx].venue,
+            capacity: venues[this.state.venueIdx].capacity,
+            organiser: this.state.organiser,
+            organiserName: this.props.users[this.state.organiser].name
+        }
+        this.props.createSeminar(updatedSeminar)
     }
 
     render() {
@@ -64,7 +83,7 @@ class CreateSeminarForm extends Component {
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
          */
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
-        const venueItems = venues.map((venue, i) => <MenuItem key={i} value={venue}> {venue} </MenuItem>);
+        const venueItems = Object.keys(venues).map(i => <MenuItem key={i} value={i}> {venues[i].venue} - {venues[i].capacity} cap </MenuItem>);
         console.log(this.props)
 
         return (
@@ -85,6 +104,11 @@ class CreateSeminarForm extends Component {
                         </FormControl>
                     </div>
                     <div>
+                        <FormControl className={classes.formControl}>
+                            <TextField required id="speakerBio" label="Enter Speaker Bio" style={{width: 800}} multiline value={this.state.speakerBio} onChange={this.handleChange}/>
+                        </FormControl>
+                    </div>
+                    <div>
                         <div>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="host-id">Select Host</InputLabel>
@@ -99,8 +123,8 @@ class CreateSeminarForm extends Component {
                             </FormControl>
 
                             <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="venue">Select Venue</InputLabel>
-                                <Select name="venue" value={this.state.venue} onChange={this.handleSelectChange}>
+                                <InputLabel htmlFor="venueIdx">Select Venue</InputLabel>
+                                <Select name="venueIdx" value={this.state.venueIdx} onChange={this.handleSelectChange}>
                                     <MenuItem value=""><em>None</em></MenuItem>
                                     {venueItems}
                                 </Select>
@@ -126,10 +150,22 @@ class CreateSeminarForm extends Component {
 
 }
 
+const mapStateToProps = (state, ownProps) => {
+    console.log(state);
+    const users = (state.firestore.data.users)?state.firestore.data.users : [];
+    return {
+        users: users
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createSeminar: (seminar) => dispatch(createSeminar(seminar))
     }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(CreateSeminarForm))
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    firestoreConnect([{ collection: 'users' }]),
+    withStyles(styles)
+)(CreateSeminarForm)

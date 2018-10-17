@@ -1,1 +1,38 @@
-["CB11.01.101", "CB11.04.201", "CB01.01.101"]
+[
+    {
+        "venue": "The Great Hall",
+        "capacity": "240"
+    },
+    {
+        "venue": "Guthrie Theatre",
+        "capacity": "220"
+    },
+    {
+        "venue": "Broadway Building",
+        "capacity": "200"
+    },
+    {
+        "venue": "Dr Chau Chak Wing Building Auditorium",
+        "capacity": "240"
+    },
+    {
+        "venue": "Dr Chau Chak Wing Building Classroom",
+        "capacity": "40"
+    },
+    {
+        "venue": "Dr Chau Chak Wing Building Classroom",
+        "capacity": "40"
+    },
+    {
+        "venue": "UTS Short Course Venue",
+        "capacity": "40"
+    },
+    {
+        "venue": "Moot and Magistrate Courts",
+        "capacity": "120"
+    },
+    {
+        "venue": "Building 10",
+        "capacity": "50"
+    }
+]
