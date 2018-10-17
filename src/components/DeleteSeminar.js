@@ -34,7 +34,9 @@ class DeleteSeminar extends Component {
     render() {
         return (
             <div>
-                <Button variant="contained" color="primary" onClick={this.handleClickOpen}>Delete Seminar</Button>
+                <div style={{display:'inline'}}>
+                    <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>Delete Seminar</Button>
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

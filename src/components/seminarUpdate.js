@@ -106,7 +106,9 @@ class SeminarUpdate extends Component {
 
         return (
             <div>
-                <Button variant="contained" color="primary" onClick={this.handleClickOpen}>Update Seminar</Button>
+                <div style={{display:"inline"}}>
+                    <Button variant="contained" color="default" onClick={this.handleClickOpen}>Update Seminar</Button>
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

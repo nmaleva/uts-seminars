@@ -44,36 +44,40 @@ const AttendeeTable = (props) => {
   //console.log(props.seminar.attendees);
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell >Email</TableCell>
-            <TableCell numeric>Phone</TableCell>
-            <TableCell> Attendance Type </TableCell>
-            <TableCell ></TableCell>
-            <TableCell ></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsArr.map(row => {
-            return (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell >{row.email}</TableCell>
-                <TableCell numeric>{row.phone}</TableCell>
-                <TableCell>  {row.attendance} </TableCell>
-                <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
-                <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+    <div style={{'paddingBottom':'10%'}}>
+      <div style={{float:'right'}}>Number of Attendees: {rowsArr.length}</div>
+      <br/>
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell >Email</TableCell>
+              <TableCell numeric>Phone</TableCell>
+              <TableCell> Attendance Type </TableCell>
+              <TableCell ></TableCell>
+              <TableCell ></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsArr.map(row => {
+              return (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell >{row.email}</TableCell>
+                  <TableCell numeric>{row.phone}</TableCell>
+                  <TableCell>  {row.attendance} </TableCell>
+                  <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
+                  <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
   );
 }
 

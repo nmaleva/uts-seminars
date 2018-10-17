@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button/Button';
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import firebase from 'firebase'
+import { Link } from 'react-router-dom';
 
 class MySeminars extends Component {
     
@@ -16,6 +17,9 @@ class MySeminars extends Component {
         return (
             <div className="home container">
                 <h2>My Seminars</h2>
+                <Button style={{float:'right'}} variant="contained" color="primary" component={Link} to="/create-seminar">Add Seminar</Button>
+                <br/>
+                <br/>
                 <SeminarsTable seminars={mySeminars} seminarPageLink="/my-seminar-details/"/>
             </div>
         )

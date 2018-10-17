@@ -24,12 +24,16 @@ const MySeminarDetails = (props) => {
             <div className="container">
                 < SeminarDetailsContent seminar={seminar} />
                 <br/>
-                < SeminarUpdate seminarId= {id} seminar={seminar}/> 
+                <div style={{width: '400px',margin:'auto', 'marginBottom':'10%'}}>
+                    <div style={{float:'left'}}> < SeminarUpdate seminarId= {id} seminar={seminar}/> </div>
+                    <div style={{float:'right'}}> < DeleteSeminar id={id} /> </div>
+                </div>
+                
+                <h2> Register an Attendee </h2>
+                < RegistrationForm attendees={attendees} seminarId={id} />
                 <br/>
-                <DeleteSeminar id={id}/>
-                < RegistrationForm attendees={attendees} seminarId={id}/>
-                < AttendeeTable seminarId={id}/>
-                <Button></Button>
+                <h2> Attendee List </h2>
+                < AttendeeTable seminarId={id} />
             </div>
         )
     } else if (seminar == null) {
