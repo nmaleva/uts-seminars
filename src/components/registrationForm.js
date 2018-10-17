@@ -18,6 +18,13 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     minWidth: 180
   },
+  group: {
+        width: 'auto',
+        height: 'auto',
+        display: 'flex',
+        flexWrap: 'nowrap',
+        flexDirection: 'row',
+    }
 });
 
 class RegistrationForm extends Component {
