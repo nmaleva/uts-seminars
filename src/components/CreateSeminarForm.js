@@ -10,12 +10,10 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import moment from 'moment'
 import hosts from '../data/hosts'
 import venues from '../data/venues'
-import { autofill } from 'redux-form';
 
 const styles = theme => ({
     formControl: {
@@ -39,11 +37,9 @@ class CreateSeminarForm extends Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target);
         this.setState({
             [e.target.id]: e.target.value
         })
-        console.log(this.state);
     }
 
     handleSelectChange = (e) => {
@@ -54,7 +50,6 @@ class CreateSeminarForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(this.props);
         let updatedSeminar = {
             title: this.state.title,
             abstract: this.state.abstract,
@@ -74,21 +69,15 @@ class CreateSeminarForm extends Component {
     }
 
     render() {
-        console.log(hosts);
-        console.log(venues);
         const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes, users} = this.props;
-        console.log(users);
-        console.log(firebase.auth().currentUser)
-        const {auth} = this.props;
-        const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
+        const {classes} = this.props;
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
         /**
          * Items below are used to populate the selects 
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
          */
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
         const venueItems = Object.keys(venues).map(i => <MenuItem key={i} value={i}> {venues[i].venue} - {venues[i].capacity} cap </MenuItem>);
-        console.log(this.props)
 
         return (
             <div>
@@ -156,7 +145,6 @@ class CreateSeminarForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     const users = (state.firestore.data.users)?state.firestore.data.users : [];
     return {
         users: users

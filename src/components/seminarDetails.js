@@ -1,11 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import RegistrationForm from './registrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import AttendeeTable from './attendeesTable'
-import SeminarUpdate from './seminarUpdate'
 import SeminarDetailsContent from './seminarDetailsContent'
 
 const SeminarDetails = (props) => {

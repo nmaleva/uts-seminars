@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import SeminarsTable from "./seminarsTable"
 import Button from '@material-ui/core/Button/Button';
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import firebase from 'firebase'
 import { Link } from 'react-router-dom';
 
 class MySeminars extends Component {
@@ -13,7 +11,6 @@ class MySeminars extends Component {
     
     render() {
         const {mySeminars} = this.props;
-        console.log(mySeminars);
         return (
             <div className="home container">
                 <h2>My Seminars</h2>
@@ -29,15 +26,12 @@ class MySeminars extends Component {
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
     let userId = state.firebase.auth.uid; /*firebase.auth().currentUser.uid;*/
-    console.log(state);
 
     let seminars = state.firestore.data.seminars;
-    console.log("Seminars-" + seminars);
     let mySeminars = [];
 
-    if(seminars != undefined) {
+    if(seminars !== undefined) {
         mySeminars = Object.keys(seminars).map(seminarId => {
-            console.log(seminars[seminarId].organiser);
             if(seminars[seminarId].organiser === userId ){
                 seminars[seminarId].id = seminarId;
                 return seminars[seminarId];
@@ -46,7 +40,7 @@ const mapStateToProps = (state) => {
     
         Array.prototype.clean = function(deleteValue) {
             for (var i = 0; i < this.length; i++) {
-              if (this[i] == deleteValue) {         
+              if (this[i] === deleteValue) {         
                 this.splice(i, 1);
                 i--;
               }

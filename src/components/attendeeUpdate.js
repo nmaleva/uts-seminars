@@ -1,26 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createSeminar } from '../actions/seminarActions'
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import Select from "@material-ui/core/Select"
-import Input from "@material-ui/core/Input"
-import InputLabel from "@material-ui/core/InputLabel"
-import moment from 'moment'
-import hosts from '../data/hosts'
-import venues from '../data/venues'
-import { autofill } from 'redux-form';
 import {updateAttendee} from '../actions/seminarActions'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
@@ -55,7 +44,6 @@ class SeminarUpdate extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.props);
         let updatedAttendee = {
             name: this.state.name,
             email: this.state.email,
@@ -81,7 +69,7 @@ class SeminarUpdate extends Component {
     render() {
         const {title, abstract, speaker, host, venue, duration} = this.state;
         const {classes} = this.props;
-        const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
         /**
          * Items below are used to populate the selects 
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children

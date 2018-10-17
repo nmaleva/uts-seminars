@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import RegistrationForm from './registrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -8,7 +7,6 @@ import AttendeeTable from './attendeesTable'
 import DeleteSeminar from './DeleteSeminar'
 import SeminarUpdate from './seminarUpdate'
 import SeminarDetailsContent from './seminarDetailsContent'
-import Button from '@material-ui/core/Button'
 
 
 const MySeminarDetails = (props) => {
@@ -18,7 +16,6 @@ const MySeminarDetails = (props) => {
 
     //Grab seminar from seminar list in state
    // const seminar = props.seminars.find(seminar => id == seminar.id)
-    console.log(seminar);
     if(seminar != null) {
         return (
             <div className="container">

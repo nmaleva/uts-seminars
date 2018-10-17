@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
-import SeminarsTable from "./seminarsTable"
 import Button from '@material-ui/core/Button/Button';
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';

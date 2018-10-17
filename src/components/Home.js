@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import SeminarsTable from "./seminarsTable"
-import Button from '@material-ui/core/Button/Button';
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import {TextField, Select, InputLabel, MenuItem, FormHelperText} from '@material-ui/core/';
+import {TextField, Select, MenuItem} from '@material-ui/core/';
 
 
 class Home extends Component {
@@ -25,12 +23,9 @@ class Home extends Component {
         this.setState({
             seminarFilter: e.target.value
         })
-        //console.log(this.state.seminarFilter)
         const {type} = this.state;
         let filteredSeminars = this.props.seminars;
-        //console.log(filteredSeminars)
         filteredSeminars = filteredSeminars.filter((seminar) => {
-            //console.log(seminar);
             var str;
             switch(type){
                 case 'Venue': str = seminar.venue; break;
@@ -39,27 +34,22 @@ class Home extends Component {
                 case 'Organiser': str = seminar.organiser; break;
                 default: str = seminar.title; break;
             }
-            //console.log(str);
             if(str.includes(this.state.seminarFilter)){
-                //console.log(seminar);
                 return seminar;
             }
         })
-        //console.log(this.state.filteredSeminars)
         this.setState({filteredSeminars})
     }
 
     handleSelectChange = event => {
         this.setState({type: event.target.value});
-        //console.log(this.state.type);
     }
 
 
     render() {
-        //console.log(this.props);
         const {seminars} = this.props;
-        if(this.state.seminarFilter == ''){
-            if(seminars.length != 0 && this.state.loaded){
+        if(this.state.seminarFilter === ''){
+            if(seminars.length !== 0 && this.state.loaded){
                 this.setState({
                     seminars,
                     loaded: true
@@ -121,11 +111,10 @@ class Home extends Component {
 
 //Grabbing Project objects from the store 
 const mapStateToProps = (state) => {
-    //console.log(state);
     var tempDate = new Date();
     var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate()
     return {
-        seminars: (state.firestore.ordered.seminars != undefined) ? state.firestore.ordered.seminars.filter((seminar) => {
+        seminars: (state.firestore.ordered.seminars !== undefined) ? state.firestore.ordered.seminars.filter((seminar) => {
             if (seminar.date >= date) {
                 return seminar;
             }

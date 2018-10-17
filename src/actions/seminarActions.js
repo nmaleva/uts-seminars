@@ -1,7 +1,3 @@
-import MySeminars from '../components/MySeminars'
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 export const createSeminar = (seminar) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //make async call to database
@@ -61,8 +57,8 @@ export const deleteAttendee = (attendeeId, seminarId) => {
 export const updateSeminar = (seminarId, seminar) => {
     return(dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('seminars').doc(seminarId).update(seminar).
-        then(() => {
+        firestore.collection('seminars').doc(seminarId).update(seminar)
+        .then(() => {
             dispatch({ type: 'UPDATE_SEMINAR', seminar:seminar});
         }).catch((err) => {
             dispatch({type:'UPDATE_SEMINAR_ERROR', err});
@@ -73,8 +69,8 @@ export const updateSeminar = (seminarId, seminar) => {
 export const updateAttendee = (seminarId, attendeeId, attendee) => {
     return(dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('seminars/'+seminarId+'/attendees').doc(attendeeId).update(attendee).
-        then(() => {
+        firestore.collection('seminars/'+seminarId+'/attendees').doc(attendeeId).update(attendee)
+        .then(() => {
             dispatch({ type: 'UPDATE_ATTENDEE', attendee:attendee});
             return window.location.reload();
         }).catch((err) => {

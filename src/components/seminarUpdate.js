@@ -2,25 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { createSeminar } from '../actions/seminarActions'
 import { withStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
-import moment from 'moment'
 import hosts from '../data/hosts'
 import venues from '../data/venues'
-import { autofill } from 'redux-form';
 import {updateSeminar} from '../actions/seminarActions'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
     formControl: {
@@ -60,7 +54,6 @@ class SeminarUpdate extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.props);
         let updatedSeminar = {
             title: this.state.title,
             abstract: this.state.abstract,
@@ -68,7 +61,7 @@ class SeminarUpdate extends Component {
             duration: this.state.duration,
             host: this.state.host,
             speaker: this.state.speaker,
-            speaker:this.state.speakerBio,
+            speakerBio:this.state.speakerBio,
             time: this.state.time,
             venueIdx: this.state.venueIdx,
             venue: venues[this.state.venueIdx].venue,
@@ -94,10 +87,8 @@ class SeminarUpdate extends Component {
 
     render() {
         const {title, abstract, speaker, host, venue, duration} = this.state;
-        console.log(this.state);
-        console.log(this.props);
         const {classes, users} = this.props;
-        const isEnabled = title != '' && abstract != '' && speaker != '' && host != '' && venue != '' && duration != 0; 
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
         /**
          * Items below are used to populate the selects 
          * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
@@ -194,7 +185,6 @@ class SeminarUpdate extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     const users = (state.firestore.data.users)?state.firestore.data.users : [];
     return {
         users: users

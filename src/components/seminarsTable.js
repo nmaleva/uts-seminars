@@ -15,8 +15,6 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { compose } from 'redux'
-import {connect} from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
 
 const actionsStyles = theme => ({
   root: {
@@ -131,9 +129,6 @@ class SeminarsTable extends React.Component {
     const { rowsPerPage, page } = this.state;
     const rows = this.props.seminars;
     const pageLink = this.props.seminarPageLink;
-    console.log(rows);
-    // const page = 0;
-    // const rowsPerPage = 5;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (

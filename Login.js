@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction } from '../actions/simpleAction'
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -29,10 +28,6 @@ class Login extends Component {
     
     
   }
-  simpleAction = (event) => {
-    this.props.simpleAction();
-   }
-
    // The component's Local state.
   state = {
     isSignedIn: false, // Local signed-in state.
@@ -196,26 +191,7 @@ class Login extends Component {
       </div>
     );
   }
-  // return (
-  //  <div className="App">
-
-  //   {/* <p className="App-intro">
-
-  //    <button onClick={this.simpleAction}>I agree</button>
-  //    <pre>
-  //     {
-  //       JSON.stringify(this.props)
-  //     }
-  //     </pre>
-  //   </p> */}
-  //  </div>
-  // );
 }
 
-const mapStateToProps = state => ({
-  ...state
- })
-const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
- })
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default Login;

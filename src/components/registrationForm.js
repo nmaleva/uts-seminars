@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { withStyles } from "@material-ui/core/styles";
 import { addAttendee } from '../actions/seminarActions'
@@ -8,7 +7,6 @@ import Button from '@material-ui/core/Button'
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
@@ -54,12 +52,8 @@ class RegistrationForm extends Component {
       e.preventDefault();
       let attendees = this.props.attendees;
       let email = this.state.email;
-      console.log(attendees);
-      console.log(Object.attendees);
-      console.log(this.state);
       let exists = Object.keys(attendees).filter(function(i){
-          console.log(attendees[i].email);
-          console.log(email)
+
           return attendees[i].email === email
         }).length>0;
       
@@ -76,7 +70,7 @@ class RegistrationForm extends Component {
   render() {
       const {name, email, phone} = this.state;
       const {classes} = this.props;
-      const isEnabled = name != '' && email != '' && phone != ''; 
+      const isEnabled = name !== '' && email !== '' && phone !== ''; 
       
 
       return (

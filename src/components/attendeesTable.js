@@ -12,7 +12,6 @@ import {connect} from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import DeleteAttendee from './DeleteAttendee';
 import AttendeeUpdate from './attendeeUpdate';
-import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -29,19 +28,11 @@ const AttendeeTable = (props) => {
   
   const { classes } = props;
   const id = props.seminarId;
-
-  
-  
-  
-  //seminarId = this.props.seminarId;
-  console.log(props);
   let rows = props.attendees;
   let rowsArr = Object.keys(rows).map(key => {
     rows[key].id = key;
     return rows[key];
   });
-  console.log(rowsArr);
-  //console.log(props.seminar.attendees);
 
   return (
     <div style={{'paddingBottom':'10%'}}>
@@ -88,10 +79,7 @@ AttendeeTable.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   const id = ownProps.seminarId;
-  const seminars = state.firestore.data.seminars;
-  const seminar = seminars ? seminars[id] : null
   return {
     attendees: (state.firestore.data['seminars/'+id+'/attendees']) ? state.firestore.data['seminars/'+id+'/attendees'] : []
   }
