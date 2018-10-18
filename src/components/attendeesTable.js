@@ -37,7 +37,7 @@ const AttendeeTable = (props) => {
 
   return (   
     <div style={{'p adding Bottom' :'10%'}}>
-      <di v style={{float:'right'}}>Number of Attendees: {rowsArr.length}</div>
+      <div style={{float:'right'}}>Number of Attendees: {rowsArr.length}</div>
       <br/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -92,9 +92,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default compose(
-  connect(mapStateTProps),
-    storeConnect( (props) =>  [ 
-      { collection: 'seminars/'+ props.seminarId +'/attendees' }
+  connect(mapStateToProps),
+  firestoreConnect( (props) =>  [ 
+    { collection: 'seminars/'+ props.seminarId +'/attendees' }
   ]),
   withStyles(styles)
 )(AttendeeTable)

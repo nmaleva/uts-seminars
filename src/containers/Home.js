@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import SeminarsTable from "./seminarsTable"
+import SeminarsTable from "../components/SeminarsTable"
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { TextField, Select, MenuItem } from '@material-ui/core/';
@@ -31,7 +31,7 @@ class Home extends Component {
                 case 'Venue': str = seminar.venue; break;
                 case 'Date': str = seminar.date; break;
                 case 'Speaker': str = seminar.speaker; break;
-                case 'Organiser': str = seminar.organiser; break;
+                case 'Organiser': str = seminar.organiserName; break;
                 default: str = seminar.title; break;
             }
             if (str.includes(this.state.seminarFilter)) {

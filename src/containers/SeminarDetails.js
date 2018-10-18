@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import RegistrationForm from './RegistrationForm'
+import RegistrationForm from '../components/RegistrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import AttendeeTable from './AttendeesTable'
-import SeminarDetailsContent from './SeminarDetailsContent'
+import AttendeeTable from '../components/AttendeesTable'
+import SeminarDetailsContent from '../components/SeminarDetailsContent'
 
 const SeminarDetails = (props) => {
     //grab ID of seminar from url parameters
@@ -25,6 +25,7 @@ const SeminarDetails = (props) => {
     } else if (seminar == null) {
         return (
             <div className="container">
+                <br />
                 Seminar is loading ...
             </div>
         )

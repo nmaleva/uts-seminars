@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom'
-import Home from './components/Home'
-import Login from './components/Login'
-import Navbar from './components/Navbar'
-import SeminarDetails from './components/SeminarDetails'
-import CreateSeminarForm from './components/CreateSeminarForm'
-import MySeminars from './components/MySeminars'
-import MySeminarDetails from './components/MySeminarDetails'
+import Home from './containers/Home'
+import Login from './containers/Login'
+import Navbar from './containers/Navbar'
+import SeminarDetails from './containers/SeminarDetails'
+import CreateSeminarForm from './containers/CreateSeminarForm'
+import MySeminars from './containers/MySeminars'
+import MySeminarDetails from './containers/MySeminarDetails'
 
 class App extends Component {
   render() {
