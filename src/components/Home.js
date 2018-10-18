@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import SeminarsTable from "./seminarsTable"
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import {TextField, Select, MenuItem} from '@material-ui/core/';
+import { TextField, Select, MenuItem } from '@material-ui/core/';
 
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             seminarFilter: "",
@@ -23,33 +23,33 @@ class Home extends Component {
         this.setState({
             seminarFilter: e.target.value
         })
-        const {type} = this.state;
+        const { type } = this.state;
         let filteredSeminars = this.props.seminars;
         filteredSeminars = filteredSeminars.filter((seminar) => {
             var str;
-            switch(type){
+            switch (type) {
                 case 'Venue': str = seminar.venue; break;
                 case 'Date': str = seminar.date; break;
                 case 'Speaker': str = seminar.speaker; break;
                 case 'Organiser': str = seminar.organiser; break;
                 default: str = seminar.title; break;
             }
-            if(str.includes(this.state.seminarFilter)){
+            if (str.includes(this.state.seminarFilter)) {
                 return seminar;
             }
         })
-        this.setState({filteredSeminars})
+        this.setState({ filteredSeminars })
     }
 
     handleSelectChange = event => {
-        this.setState({type: event.target.value});
+        this.setState({ type: event.target.value });
     }
 
 
     render() {
-        const {seminars} = this.props;
-        if(this.state.seminarFilter === ''){
-            if(seminars.length !== 0 && this.state.loaded){
+        const { seminars } = this.props;
+        if (this.state.seminarFilter === '') {
+            if (seminars.length !== 0 && this.state.loaded) {
                 this.setState({
                     seminars,
                     loaded: true
@@ -58,34 +58,34 @@ class Home extends Component {
             return (
                 <div className="home container">
                     <h2>Browse UTS Seminars</h2>
-                    <div style={{float:'right'}}>
-                        <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
-                            <Select
-                                value={this.state.type}
-                                onChange={this.handleSelectChange}
-                                name="age"
-                                displayEmpty
-                            >
-                                <MenuItem value="" disabled>
-                                    Filter Type
+                    <div style={{ float: 'right' }}>
+                        <TextField value={this.state.seminarFilter} onChange={this.handleChange} />
+                        <Select
+                            value={this.state.type}
+                            onChange={this.handleSelectChange}
+                            name="age"
+                            displayEmpty
+                        >
+                            <MenuItem value="" disabled>
+                                Filter Type
                                 </MenuItem>
-                                <MenuItem value={'Venue'}>Venue</MenuItem>
-                                <MenuItem value={'Date'}>Date</MenuItem>
-                                <MenuItem value={'Speaker'}>Speaker</MenuItem>
-                                <MenuItem value={'Organiser'}>Organiser</MenuItem>
+                            <MenuItem value={'Venue'}>Venue</MenuItem>
+                            <MenuItem value={'Date'}>Date</MenuItem>
+                            <MenuItem value={'Speaker'}>Speaker</MenuItem>
+                            <MenuItem value={'Organiser'}>Organiser</MenuItem>
                         </Select>
                     </div>
-                    <br/>
-                    <SeminarsTable seminars={seminars} seminarPageLink="/seminar-details/"/>
+                    <br />
+                    <SeminarsTable seminars={seminars} seminarPageLink="/seminar-details/" />
                 </div>
             )
         }
-        else{
+        else {
             return (
                 <div className="home container">
                     <h2>Browse UTS Seminars</h2>
-                    <div style={{float:'right'}}>
-                        <TextField value={this.state.seminarFilter} onChange={this.handleChange}/>
+                    <div style={{ float: 'right' }}>
+                        <TextField value={this.state.seminarFilter} onChange={this.handleChange} />
                         <Select
                             value={this.state.type}
                             onChange={this.handleSelectChange}
@@ -101,18 +101,21 @@ class Home extends Component {
                             <MenuItem value={'Organiser'}>Organiser</MenuItem>
                         </Select>
                     </div>
-                    <br/>
-                    <SeminarsTable seminars={this.state.filteredSeminars} seminarPageLink="/seminar-details/"/>
+                    <br />
+                    <SeminarsTable seminars={this.state.filteredSeminars} seminarPageLink="/seminar-details/" />
                 </div>
             )
         }
     }
 }
 
-//Grabbing Project objects from the store 
+/**
+ * Saving to props seminar list
+ * @param {*} state 
+ */
 const mapStateToProps = (state) => {
     var tempDate = new Date();
-    var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate()
+    var date = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate()
     return {
         seminars: (state.firestore.ordered.seminars !== undefined) ? state.firestore.ordered.seminars.filter((seminar) => {
             if (seminar.date >= date) {

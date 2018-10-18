@@ -17,8 +17,8 @@ import venues from '../data/venues'
 
 const styles = theme => ({
     formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 180
+        margin: theme.spacing.unit,
+        minWidth: 180
     },
 });
 
@@ -63,43 +63,41 @@ class CreateSeminarForm extends Component {
             venue: venues[this.state.venueIdx].venue,
             capacity: venues[this.state.venueIdx].capacity,
             organiser: this.state.organiser,
-            organiserName: this.props.users[this.state.organiser].name
+            organiserName: firebase.auth().currentUser.displayName
         }
         this.props.createSeminar(updatedSeminar)
     }
 
     render() {
-        const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes} = this.props;
-        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
-        /**
-         * Items below are used to populate the selects 
-         * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
-         */
+        const { title, abstract, speaker, host, venue, duration } = this.state;
+        const { classes } = this.props;
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0;
+
+        // Items below are used to populate the selects 
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
         const venueItems = Object.keys(venues).map(i => <MenuItem key={i} value={i}> {venues[i].venue} - {venues[i].capacity} cap </MenuItem>);
 
         return (
             <div>
-                <form style={{width: '100%' }}>
+                <form style={{ width: '100%' }}>
                     <h1> Create Seminar </h1>
                     <div> <b> Organiser: </b> {firebase.auth().currentUser.displayName} </div>
                     <div>
-                        <FormControl className={classes.formControl}>       
-                            <TextField style={{width: 500}} required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange}/>
+                        <FormControl className={classes.formControl}>
+                            <TextField style={{ width: 500 }} required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange} />
                         </FormControl>
                         <FormControl className={classes.formControl}>
-                            <TextField id="speaker" label="Enter Speaker"  style={{width: 300}}  value={this.state.speaker} onChange={this.handleChange}/>
-                        </FormControl>
-                    </div>
-                    <div>
-                        <FormControl className={classes.formControl}>
-                            <TextField required id="abstract" label="Enter Abstract" style={{width: 800}} multiline value={this.state.abstract} onChange={this.handleChange}/>
+                            <TextField id="speaker" label="Enter Speaker" style={{ width: 300 }} value={this.state.speaker} onChange={this.handleChange} />
                         </FormControl>
                     </div>
                     <div>
                         <FormControl className={classes.formControl}>
-                            <TextField required id="speakerBio" label="Enter Speaker Bio" style={{width: 800}} multiline value={this.state.speakerBio} onChange={this.handleChange}/>
+                            <TextField required id="abstract" label="Enter Abstract" style={{ width: 800 }} multiline value={this.state.abstract} onChange={this.handleChange} />
+                        </FormControl>
+                    </div>
+                    <div>
+                        <FormControl className={classes.formControl}>
+                            <TextField required id="speakerBio" label="Enter Speaker Bio" style={{ width: 800 }} multiline value={this.state.speakerBio} onChange={this.handleChange} />
                         </FormControl>
                     </div>
                     <div>
@@ -124,15 +122,15 @@ class CreateSeminarForm extends Component {
                                 </Select>
                             </FormControl>
                             <FormControl className={classes.formControl}>
-                                <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange}/>
+                                <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange} />
                             </FormControl>
                         </div>
                         <FormControl className={classes.formControl}>
-                            <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange}/>
+                            <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange} />
                         </FormControl>
                         <FormControl className={classes.formControl}>
-                            <TextField id="duration" type="number" label="Enter Duration in Minutes"  value={this.state.duration} onChange={this.handleChange}/>
-                        </FormControl><br/><br/>
+                            <TextField id="duration" type="number" label="Enter Duration in Minutes" value={this.state.duration} onChange={this.handleChange} />
+                        </FormControl><br /><br />
                         <FormControl className={classes.formControl}>
                             <Button disabled={!isEnabled} variant="contained" color="primary" className={classes.button} onClick={this.handleSubmit}> Submit </Button>
                         </FormControl>
@@ -144,13 +142,10 @@ class CreateSeminarForm extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const users = (state.firestore.data.users)?state.firestore.data.users : [];
-    return {
-        users: users
-    }
-}
-
+/**
+ * Dispatches action to Create 
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         createSeminar: (seminar) => dispatch(createSeminar(seminar)),
@@ -158,7 +153,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
-    firestoreConnect([{ collection: 'users' }]),
+    connect(null, mapDispatchToProps),
     withStyles(styles)
 )(CreateSeminarForm)

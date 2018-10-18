@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControl from "@material-ui/core/FormControl"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import {updateAttendee} from '../actions/seminarActions'
+import { updateAttendee } from '../actions/seminarActions'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,8 +15,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 
 const styles = theme => ({
     formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 180
+        margin: theme.spacing.unit,
+        minWidth: 180
     },
 });
 
@@ -26,7 +26,7 @@ class SeminarUpdate extends Component {
         email: this.props.attendee.email,
         phone: this.props.attendee.phone,
         attendance: this.props.attendee.attendance,
-        open:false
+        open: false
     }
 
 
@@ -57,23 +57,17 @@ class SeminarUpdate extends Component {
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
 
 
-    
-
-
     render() {
-        const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes} = this.props;
-        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
-        /**
-         * Items below are used to populate the selects 
-         * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
-         */
+        const { title, abstract, speaker, host, venue, duration } = this.state;
+        const { classes } = this.props;
+        //When all fields are filled in, then button is enabled to submit
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0;
 
         return (
             <div>
@@ -85,49 +79,52 @@ class SeminarUpdate extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogContent>
-                        <form style={{width: '100%' }}>
+                        <form style={{ width: '100%' }}>
                             <h1> Update Attendee </h1>
                             <div>
-                                <FormControl className={classes.formControl}>       
-                                    <TextField style={{width: 500}} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange}/>
+                                <FormControl className={classes.formControl}>
+                                    <TextField style={{ width: 500 }} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange} />
                                 </FormControl>
                                 <FormControl className={classes.formControl}>
-                                    <TextField id="email" label="Enter Email"  style={{width: 500}}  value={this.state.email} onChange={this.handleChange}/>
+                                    <TextField id="email" label="Enter Email" style={{ width: 500 }} value={this.state.email} onChange={this.handleChange} />
                                 </FormControl>
                             </div>
                             <div>
                                 <FormControl className={classes.formControl}>
-                                    <TextField required id="phone" label="Enter Phone Number" style={{width: 500}} multiline value={this.state.phone} onChange={this.handleChange}/>
+                                    <TextField required id="phone" label="Enter Phone Number" style={{ width: 500 }} multiline value={this.state.phone} onChange={this.handleChange} />
                                 </FormControl>
                             </div>
                             <div>
-                            <FormControl component="fieldset" className={classes.formControl}>
-                                <FormLabel component="legend">Are you?</FormLabel>
-                                <RadioGroup
-                                    aria-label="Are you?"
-                                    name="attendance"
-                                    className={classes.group}
-                                    value={this.state.attendance}
-                                    onChange={this.handleSelectChange}
-                                >
-                                    <FormControlLabel value="interested" control={<Radio />} label="Interested" />
-                                    <FormControlLabel value="attending" control={<Radio />} label="Attending" />
-                                </RadioGroup>
-                            </FormControl>
+                                <FormControl component="fieldset" className={classes.formControl}>
+                                    <FormLabel component="legend">Are you?</FormLabel>
+                                    <RadioGroup
+                                        aria-label="Are you?"
+                                        name="attendance"
+                                        className={classes.group}
+                                        value={this.state.attendance}
+                                        onChange={this.handleSelectChange}
+                                    >
+                                        <FormControlLabel value="interested" control={<Radio />} label="Interested" />
+                                        <FormControlLabel value="attending" control={<Radio />} label="Attending" />
+                                    </RadioGroup>
+                                </FormControl>
                             </div>
                         </form>
                     </DialogContent>
                     <DialogActions>
-                    <Button disabled={!isEnabled} variant="contained" color="default" className={classes.button} onClick={this.handleSubmit}> Update </Button>
-                    <Button disabled={!isEnabled} variant="contained" color="secondary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
+                        <Button disabled={!isEnabled} variant="contained" color="default" className={classes.button} onClick={this.handleSubmit}> Update </Button>
+                        <Button disabled={!isEnabled} variant="contained" color="secondary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
                     </DialogActions>
                 </Dialog>
             </div>
         )
     }
-
 }
 
+/**
+ * dispatches action to update attendee details
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         updateAttendee: (seminarId, attendeeId, attendee) => dispatch(updateAttendee(seminarId, attendeeId, attendee))

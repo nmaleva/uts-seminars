@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -18,7 +18,7 @@ class DeleteAttendee extends Component {
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -58,10 +58,14 @@ class DeleteAttendee extends Component {
     }
 }
 
+/**
+ * Dispatches action to delete the following attendee
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteAttendee: (attendeeId, seminarId) => dispatch(deleteAttendee(attendeeId, seminarId))
     }
-  }
-  
+}
+
 export default connect(null, mapDispatchToProps)(DeleteAttendee)

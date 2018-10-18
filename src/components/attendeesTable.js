@@ -8,10 +8,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { compose } from 'redux'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import DeleteAttendee from './DeleteAttendee';
-import AttendeeUpdate from './attendeeUpdate';
+import AttendeeUpdate from './AttendeeUpdate';
 
 const styles = theme => ({
   root: {
@@ -25,18 +25,19 @@ const styles = theme => ({
 });
 
 const AttendeeTable = (props) => {
-  
+
   const { classes } = props;
   const id = props.seminarId;
   let rows = props.attendees;
+  //Converting rows into an[] so that it can be used in .map()
   let rowsArr = Object.keys(rows).map(key => {
     rows[key].id = key;
     return rows[key];
   });
 
-  return (
-    <div style={{'paddingBottom':'10%'}}>
-      <div style={{float:'right'}}>Number of Attendees: {rowsArr.length}</div>
+  return (   
+    <div style={{'p adding Bottom' :'10%'}}>
+      <di v style={{float:'right'}}>Number of Attendees: {rowsArr.length}</div>
       <br/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -60,7 +61,7 @@ const AttendeeTable = (props) => {
                   <TableCell >{row.email}</TableCell>
                   <TableCell numeric>{row.phone}</TableCell>
                   <TableCell>  {row.attendance} </TableCell>
-                  <TableCell > <AttendeeUpdate seminarId={id} attendeeId={row.id} attendee={row} /></TableCell>
+                  <TableCell > <AttendeeUpdate seminarId={id} attendeeId ={row.id} attendee={row} /></TableCell>
                   <TableCell ><DeleteAttendee id={row.id} seminarId={id}/></TableCell>
                 </TableRow>
               );
@@ -77,17 +78,22 @@ AttendeeTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+/**
+ * Grabs Attendees for a specific seminar
+ * @param {*} state 
+ * @param {*} ownProps 
+ */
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.seminarId;
-  return {
+  return {        
     attendees: (state.firestore.data['seminars/'+id+'/attendees']) ? state.firestore.data['seminars/'+id+'/attendees'] : []
   }
 }
 
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect( (props) => [
+  connect(mapStateTProps),
+    storeConnect( (props) =>  [ 
       { collection: 'seminars/'+ props.seminarId +'/attendees' }
   ]),
   withStyles(styles)

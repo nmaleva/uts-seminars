@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -17,7 +17,7 @@ class DeleteSeminar extends Component {
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -30,7 +30,7 @@ class DeleteSeminar extends Component {
     render() {
         return (
             <div>
-                <div style={{display:'inline'}}>
+                <div style={{ display: 'inline' }}>
                     <Button variant="contained" color="secondary" onClick={this.handleClickOpen}>Delete Seminar</Button>
                 </div>
                 <Dialog
@@ -59,10 +59,14 @@ class DeleteSeminar extends Component {
     }
 }
 
+/**
+ * Dispatches action to delete selected seminar
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteSeminar: (seminarId) => dispatch(deleteSeminar(seminarId))
     }
-  }
-  
+}
+
 export default connect(null, mapDispatchToProps)(DeleteSeminar)

@@ -23,10 +23,10 @@ const styles = {
   },
 };
 
-function Navbar(props)  {
+function Navbar(props) {
   const { auth } = props;
   const { classes } = props;
-  
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default compose(connect(mapStateToProps),withStyles(styles))(Navbar)
+export default compose(connect(mapStateToProps), withStyles(styles))(Navbar)

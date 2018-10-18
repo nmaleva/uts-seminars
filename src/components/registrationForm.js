@@ -12,11 +12,11 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 
 
 const styles = theme => ({
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 180
-  },
-  group: {
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 180
+    },
+    group: {
         width: 'auto',
         height: 'auto',
         display: 'flex',
@@ -24,108 +24,110 @@ const styles = theme => ({
         flexDirection: 'row',
     },
     errText: {
-        color:'red'
+        color: 'red'
     }
 });
 
 class RegistrationForm extends Component {
-  state = {
-      name: '',
-      email: '',
-      phone: '',
-      attendance: 'interested',
-      error: ''
-  }
+    state = {
+        name: '',
+        email: '',
+        phone: '',
+        attendance: 'interested',
+        error: ''
+    }
 
-  error = '';
+    error = '';
 
-  handleChange = (e) => {
-      this.setState({
-          [e.target.id]: e.target.value
-      })
-  }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
 
-  handleSelectChange = (e) => {
-    this.setState({
-        [e.target.name]: e.target.value
-    })
+    handleSelectChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     handleSubmit = (e) => {
-      e.preventDefault();
-      let attendees = this.props.attendees;
-      let email = this.state.email;
-      let exists = Object.keys(attendees).filter(function(i){
+        e.preventDefault();
+        let attendees = this.props.attendees;
+        let email = this.state.email;
+        //checks if email exists in existing attendee list
+        let isExists = Object.keys(attendees).filter(function (i) { return attendees[i].email === email }).length > 0;
 
-          return attendees[i].email === email
-        }).length>0;
-      
-        if(!exists) {
-            let attendee = {name:this.state.name, email:this.state.email, phone:this.state.phone, attendance:this.state.attendance}
-            this.props.addAttendee(attendee,this.props.seminarId);
-      } else {
-            this.setState({error: "This Email has already been recorded for this seminar!"});
-      }
+        if (!isExists) {
+            let attendee = { name: this.state.name, email: this.state.email, phone: this.state.phone, attendance: this.state.attendance }
+            this.props.addAttendee(attendee, this.props.seminarId);
+        } else {
+            this.setState({ error: "This Email has already been recorded for this seminar!" });
+        }
     }
 
-  
 
-  render() {
-      const {name, email, phone} = this.state;
-      const {classes} = this.props;
-      const isEnabled = name !== '' && email !== '' && phone !== ''; 
-      
 
-      return (
-          <div>
-              <div className={classes.errText}>{this.state.error}</div>
-              <form style={{width: '100%' }}>
-                  
-                  <div>
-                      <FormControl className={classes.formControl}>       
-                          <TextField style={{width: 500}} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange}/>
-                      </FormControl>
-                      <FormControl className={classes.formControl}>
-                          <TextField required id="phone" label="Enter Phone Number" style={{width: 300}} multiline value={this.state.number} onChange={this.handleChange}/>
-                      </FormControl>
-                      
-                  </div>
+    render() {
+        const { name, email, phone } = this.state;
+        const { classes } = this.props;
+        const isEnabled = name !== '' && email !== '' && phone !== '';
+
+
+        return (
+            <div>
+                <div className={classes.errText}>{this.state.error}</div>
+                <form style={{ width: '100%' }}>
+
+                    <div>
                         <FormControl className={classes.formControl}>
-                            <TextField required id="email" label="Enter Email"  style={{width: 815}}  value={this.state.email} onChange={this.handleChange}/>
+                            <TextField style={{ width: 500 }} required id="name" label="Enter Name" value={this.state.name} onChange={this.handleChange} />
                         </FormControl>
-                  <div>
-                      
-                  </div>
-                  <div>
-                  <FormControl component="fieldset" className={classes.formControl}>
-                    <FormLabel component="legend">Are you?</FormLabel>
-                    <RadioGroup
-                        aria-label="Are you?"
-                        name="attendance"
-                        className={classes.group}
-                        value={this.state.attendance}
-                        onChange={this.handleSelectChange}
-                    >
-                        <FormControlLabel value="interested" control={<Radio />} label="Interested" />
-                        <FormControlLabel value="attending" control={<Radio />} label="Attending" />
-                    </RadioGroup>
-                  </FormControl>
-                  </div>
-                  <br/><br/>
+                        <FormControl className={classes.formControl}>
+                            <TextField required id="phone" label="Enter Phone Number" style={{ width: 300 }} multiline value={this.state.number} onChange={this.handleChange} />
+                        </FormControl>
+
+                    </div>
+                    <FormControl className={classes.formControl}>
+                        <TextField required id="email" label="Enter Email" style={{ width: 815 }} value={this.state.email} onChange={this.handleChange} />
+                    </FormControl>
+                    <div>
+
+                    </div>
+                    <div>
+                        <FormControl component="fieldset" className={classes.formControl}>
+                            <FormLabel component="legend">Are you?</FormLabel>
+                            <RadioGroup
+                                aria-label="Are you?"
+                                name="attendance"
+                                className={classes.group}
+                                value={this.state.attendance}
+                                onChange={this.handleSelectChange}
+                            >
+                                <FormControlLabel value="interested" control={<Radio />} label="Interested" />
+                                <FormControlLabel value="attending" control={<Radio />} label="Attending" />
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
+                    <br /><br />
                     <FormControl className={classes.formControl}>
                         <Button disabled={!isEnabled} variant="contained" color="primary" className={classes.button} onClick={this.handleSubmit}> Submit </Button>
                     </FormControl>
-              </form>
-          </div>
-      )
-  }
+                </form>
+            </div>
+        )
+    }
 
 }
 
+/**
+ * Dispatches action to add attendee 
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
-  return {
-      addAttendee: (attendee, seminarId) => dispatch(addAttendee(attendee, seminarId))
-  }
+    return {
+        addAttendee: (attendee, seminarId) => dispatch(addAttendee(attendee, seminarId))
+    }
 }
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(RegistrationForm))

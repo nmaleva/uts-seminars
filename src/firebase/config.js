@@ -14,6 +14,6 @@ const DB_CONFIG = {
 };
 
 firebase.initializeApp(DB_CONFIG);
-firebase.firestore().settings({timestampsInSnapshots: true})
+firebase.firestore().settings({ timestampsInSnapshots: true })
 
 export default firebase;

@@ -11,15 +11,15 @@ import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
 import hosts from '../data/hosts'
 import venues from '../data/venues'
-import {updateSeminar} from '../actions/seminarActions'
+import { updateSeminar } from '../actions/seminarActions'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 
 const styles = theme => ({
     formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 180
+        margin: theme.spacing.unit,
+        minWidth: 180
     },
 });
 
@@ -36,7 +36,7 @@ class SeminarUpdate extends Component {
         venueIdx: this.props.seminar.venueIdx,
         organiser: this.props.seminar.organiser,
         organiserName: this.props.seminar.organiserName,
-        open:false
+        open: false
     }
 
 
@@ -61,7 +61,7 @@ class SeminarUpdate extends Component {
             duration: this.state.duration,
             host: this.state.host,
             speaker: this.state.speaker,
-            speakerBio:this.state.speakerBio,
+            speakerBio: this.state.speakerBio,
             time: this.state.time,
             venueIdx: this.state.venueIdx,
             venue: venues[this.state.venueIdx].venue,
@@ -76,30 +76,24 @@ class SeminarUpdate extends Component {
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
 
-
-    
-
-
     render() {
-        const {title, abstract, speaker, host, venue, duration} = this.state;
-        const {classes, users} = this.props;
-        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0; 
-        /**
-         * Items below are used to populate the selects 
-         * Note: Need to add key(i) to each item in array so React can handle DOM Change of children
-         */
+        const { title, abstract, speaker, host, venue, duration } = this.state;
+        const { classes, users } = this.props;
+        const isEnabled = title !== '' && abstract !== '' && speaker !== '' && host !== '' && venue !== '' && duration !== 0;
+
+        //Items below are used to populate the selects 
         const hostItems = hosts.map((host, i) => <MenuItem key={i} value={host}> {host} </MenuItem>);
         const venueItems = Object.keys(venues).map(i => <MenuItem key={i} value={i}> {venues[i].venue} - {venues[i].capacity} cap </MenuItem>);
         const userItems = Object.keys(users).map(i => <MenuItem key={i} value={users[i].id}> {users[i].name} </MenuItem>)
 
         return (
             <div>
-                <div style={{display:"inline"}}>
+                <div style={{ display: "inline" }}>
                     <Button variant="contained" color="default" onClick={this.handleClickOpen}>Update Seminar</Button>
                 </div>
                 <Dialog
@@ -109,24 +103,24 @@ class SeminarUpdate extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogContent>
-                        <form style={{width: '100%' }}>
+                        <form style={{ width: '100%' }}>
                             <h1> Update Seminar - {this.props.seminar.title} </h1>
                             <div>
-                                <FormControl className={classes.formControl}>       
-                                    <TextField style={{width: 500}} required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange}/>
+                                <FormControl className={classes.formControl}>
+                                    <TextField style={{ width: 500 }} required id="title" label="Enter Title" value={this.state.title} onChange={this.handleChange} />
                                 </FormControl>
                                 <FormControl className={classes.formControl}>
-                                    <TextField id="speaker" label="Enter Speaker"  style={{width: 300}}  value={this.state.speaker} onChange={this.handleChange}/>
-                                </FormControl>
-                            </div>
-                            <div>
-                                <FormControl className={classes.formControl}>
-                                    <TextField required id="abstract" label="Enter Speaker Biography" style={{width: 500}} multiline value={this.state.speakerBio} onChange={this.handleChange}/>
+                                    <TextField id="speaker" label="Enter Speaker" style={{ width: 300 }} value={this.state.speaker} onChange={this.handleChange} />
                                 </FormControl>
                             </div>
                             <div>
                                 <FormControl className={classes.formControl}>
-                                    <TextField required id="abstract" label="Enter Abstract" style={{width: 500}} multiline value={this.state.abstract} onChange={this.handleChange}/>
+                                    <TextField required id="abstract" label="Enter Speaker Biography" style={{ width: 500 }} multiline value={this.state.speakerBio} onChange={this.handleChange} />
+                                </FormControl>
+                            </div>
+                            <div>
+                                <FormControl className={classes.formControl}>
+                                    <TextField required id="abstract" label="Enter Abstract" style={{ width: 500 }} multiline value={this.state.abstract} onChange={this.handleChange} />
                                 </FormControl>
                             </div>
                             <div>
@@ -161,21 +155,21 @@ class SeminarUpdate extends Component {
 
 
                                     <FormControl className={classes.formControl}>
-                                        <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange}/>
+                                        <TextField id="date" type="date" label="Choose Date" value={this.state.date} onChange={this.handleChange} />
                                     </FormControl>
                                 </div>
                                 <FormControl className={classes.formControl}>
-                                    <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange}/>
+                                    <TextField id="time" type="time" label="Choose Time" value={this.state.time} onChange={this.handleChange} />
                                 </FormControl>
                                 <FormControl className={classes.formControl}>
-                                    <TextField id="duration" type="number" label="Enter Duration in Minutes"  value={this.state.duration} onChange={this.handleChange}/>
-                                </FormControl><br/><br/>
+                                    <TextField id="duration" type="number" label="Enter Duration in Minutes" value={this.state.duration} onChange={this.handleChange} />
+                                </FormControl><br /><br />
                             </div>
                         </form>
                     </DialogContent>
                     <DialogActions>
-                    <Button disabled={!isEnabled} variant="contained" color="default" className={classes.button} onClick={this.handleSubmit}> Update </Button>
-                    <Button disabled={!isEnabled} variant="contained" color="secondary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
+                        <Button disabled={!isEnabled} variant="contained" color="default" className={classes.button} onClick={this.handleSubmit}> Update </Button>
+                        <Button disabled={!isEnabled} variant="contained" color="secondary" className={classes.button} onClick={this.handleClose}> Cancel </Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -184,21 +178,30 @@ class SeminarUpdate extends Component {
 
 }
 
+/**
+ * Saves list of registered users (organisers) of system to props for use
+ * @param {*} state 
+ * @param {*} ownProps 
+ */
 const mapStateToProps = (state, ownProps) => {
-    const users = (state.firestore.data.users)?state.firestore.data.users : [];
+    const users = (state.firestore.data.users) ? state.firestore.data.users : [];
     return {
         users: users
     }
 }
 
+/**
+ * Dispatches action to update seminar
+ * @param {*} dispatch 
+ */
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateSeminar: (seminarId, seminar) => dispatch(updateSeminar(seminarId,seminar))
+        updateSeminar: (seminarId, seminar) => dispatch(updateSeminar(seminarId, seminar))
     }
 }
 
 export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([{ collection: 'users' }]),
     withStyles(styles)
 )(SeminarUpdate)
