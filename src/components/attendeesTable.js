@@ -11,7 +11,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import DeleteAttendee from './DeleteAttendee';
-import AttendeeUpdate from './AttendeeUpdate';
+import AttendeeUpdate from './attendeeUpdate';
 
 const styles = theme => ({
   root: {

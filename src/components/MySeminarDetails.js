@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import RegistrationForm from './RegistrationForm'
-import AttendeeTable from './AttendeesTable'
+import RegistrationForm from './registrationForm'
+import AttendeeTable from './attendeesTable'
 import DeleteSeminar from './DeleteSeminar'
-import SeminarUpdate from './SeminarUpdate'
-import SeminarDetailsContent from './SeminarDetailsContent'
+import SeminarUpdate from './seminarUpdate'
+import SeminarDetailsContent from './seminarDetailsContent'
 
 
 const MySeminarDetails = (props) => {

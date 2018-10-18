@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import RegistrationForm from './RegistrationForm'
+import RegistrationForm from './registrationForm'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import AttendeeTable from './AttendeesTable'
-import SeminarDetailsContent from './SeminarDetailsContent'
+import AttendeeTable from './attendeesTable'
+import SeminarDetailsContent from './seminarDetailsContent'
 
 const SeminarDetails = (props) => {
     //grab ID of seminar from url parameters
