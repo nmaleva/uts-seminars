@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import SeminarsTable from "./SeminarsTable"
+import SeminarsTable from "./seminarsTable"
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { TextField, Select, MenuItem } from '@material-ui/core/';
